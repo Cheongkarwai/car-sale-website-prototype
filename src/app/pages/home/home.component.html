@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <section class="row">
+    @if (images) {
+    <ngb-carousel  [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+      @for (image of images; track image) {
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper border">
+        <img [src]="image" alt="Random slide" style="width:100%;max-height:500px;object-fit: cover;"/>
+      </div>
+    </ng-template>
+    }
+    </ngb-carousel>
+    }
+  </section>
+  <section class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="row g-5">
+        <div class="col-md-4" *ngFor="let card of cards">
+          <div class="card" style="width: 18rem;">
+            <img [src]="card.image" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Model {{card.title}}</h5>
+              <p class="card-text">{{card.price | currency : 'MYR'}}</p>
+              <a class="btn">Buy Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+      <button type="submit" class="btn btn-primary btn-md" id="whatsapp-button" (click)="initiateWhatsapp()">
+        <i class="fa-brands fa-whatsapp"></i>
+        Start to chat
+      </button>
+</div>

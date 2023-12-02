@@ -1,0 +1,46 @@
+nav{
+  font-family: "Montserrat", serif;
+}
+
+nav ul li a{
+  cursor:pointer;
+}
+
+.dropdown-menu.show ul{
+  display: flex;
+}
+
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.offcanvas-ul li a{
+  display:block;
+  text-decoration: none;
+  cursor:pointer;
+}
+
+.offcanvas-ul li a:hover{
+  background-color:rgba(0,0,0,0.01)
+}
+
+.model-name{
+  font-size:1.125rem;
+}
+
+.dropdown-toggle::after{
+  display: none;
+}
+
+.model-price,.model-name{
+  margin-top:5px;
+  font-weight:500;
+  line-height:1.5em;
+  letter-spacing:1px;
+}
+
+.model-price{
+  font-size:0.875em;
+}

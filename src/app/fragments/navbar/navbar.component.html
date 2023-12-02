@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-3 w-100">
+  <a class="navbar-brand">
+    <img classs="img-responsive" width="130px" src="https://www.volvocars.com/static/shared/images/volvo-wordmark-black.svg" alt="volvo" />
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown _megaMenu" ngbDropdown display="dynamic" placement="bottom-end">
+        <button
+          class="nav-link dropdown-toggle"
+          href="#"
+          ngbDropdownToggle
+          (click)="toggleMegaMenu()"
+        >
+          Explore
+          <!--          Dropdown-->
+          <small><i [ngClass]="isMegaMenuVisible ? 'fa-solid fa-chevron-up ms-2' : 'fa-solid fa-chevron-down ms-2'"></i></small>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+          <ul>
+            <li *ngFor="let carModel of carModels">
+              <a class="dropdown-item" routerLink="/car-details">
+                <img class="img-thumbnail"
+                   [src]="carModel.image"
+                   alt="xc90"/>
+                <div class="d-flex flex-column align-items-center">
+                  <div class="model-name">{{carModel.name}}</div>
+                  <div class="model-price">From {{carModel.price | currency :'MYR'}}</div>
+                </div>
+              </a>
+            </li>
+          </ul>
+<!--          <ul>-->
+<!--            <li>-->
+<!--              <a class="dropdown-item border" href="">-->
+<!--                <img src=""/>-->
+<!--                <div class="justify-content-center">-->
+<!--                  <div>Download Brochure</div>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>-->
+<!--            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>-->
+<!--            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>-->
+<!--            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>-->
+<!--          </ul>-->
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="openEnd(content)">Menu</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+    <img classs="img-responsive" width="130px" src="https://www.volvocars.com/static/shared/images/volvo-wordmark-black.svg" alt="volvo" />
+    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+  </div>
+  <div class="offcanvas-body">
+    <nav>
+      <ul  class="offcanvas-ul">
+        <li>
+          <a class="py-3 ps-2 text-dark" routerLink="/download-brochure">Download Brochure</a>
+        </li>
+        <li>
+         <a class="py-3 ps-2 text-dark" routerLink="/find-us">Find Us</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</ng-template>

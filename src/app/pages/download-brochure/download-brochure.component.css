@@ -1,0 +1,22 @@
+
+
+h1{
+  font-size:25px;
+}
+
+.download-brochure-container{
+  height:50vh;
+}
+
+.car-title{
+  font-size:20px;
+}
+
+.download-brochure-section{
+  padding: 60px 250px 0;
+}
+
+.btn{
+  background-color:#2a609d;
+  color:white;
+}

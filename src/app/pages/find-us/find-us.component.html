@@ -1,0 +1,37 @@
+<div class="container-fluid py-5 find-us-container">
+  <div class="d-flex justify-content-center">
+    <h1>
+      Contact Us
+    </h1>
+  </div>
+  <section class="row g-5 find-us-section">
+    <div class="col-6">
+      <div class="purple-gradient color-block z-depth-1 p-3 shadow bg-white rounded d-flex flex-column">
+        <span class="text-dark weight-bold h5"><i class="fa-regular fa-map"></i> Location</span>
+        <ng-container *ngIf="(apiLoaded | async)">
+          <google-map width="100%"
+                      [center]="center"
+                      [zoom]="zoom"
+                      (mapClick)="addMarker($event)">
+            <map-marker [position]="markerPosition" [options]="markerOptions" />
+
+          </google-map>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="purple-gradient color-block z-depth-1 p-3 shadow bg-white rounded d-flex flex-column">
+        <span class="text-dark weight-bold h5">
+           <i class="fa-solid fa-location-dot pe-2"></i>Address</span>
+        <address>
+          <br />
+            0333754300<br />
+            <br />
+         No KU18, Taman Perindustrian, 39,<br />
+          Lebuh Sultan Mohamed 2, Bandar Sultan Suleiman,<br />
+          42000 Port Klang, Selangor
+        </address>
+      </div>
+    </div>
+  </section>
+</div>

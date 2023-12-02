@@ -1,0 +1,103 @@
+<div class="container-fluid">
+
+  <div class="row pt-5">
+
+    <ul ngbNav [activeId]="route.fragment | async" class="nav-tabs">
+      @for (link of links; track link) {
+      <li [ngbNavItem]="link.fragment">
+        <a ngbNavLink routerLink="." [fragment]="link.fragment">{{ link.title }}</a>
+    </li>
+      }
+    </ul>
+
+    <!-- and an actual outlet elsewhere -->
+    <router-outlet></router-outlet>
+  </div>
+  <section class="row">
+    <fieldset>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/kdlVaT1NSDQ?si=HCCbF3BQwVT4F7Lm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </fieldset>
+  </section>
+  <section class="row justify-content-center">
+    <div class="col-md-8 row">
+      <div class="col-md-6">
+      <span class="h3">
+        Right here. Right now. Why wait to <br /> make the switch? Turn your everyday <br /> journeys electric with our luxury plug-in hybrid SUV.
+      </span>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <button class="btn buy-now-btn">Buy now</button>
+          <br />
+          <strong>From MYRXXX</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="row justify-content-center">
+    <div class=" col-8 row g-3">
+      <div class="col-12">
+        <video class="w-100" autoplay loop muted>
+          <source src="https://www.volvocars.com/images/v/-/media/applications/pdpspecificationpage/my24/xc90-hybrid/pdp/xc90-hybrid-gallery-3-1x1-video.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="col-6">
+        <img class="img-fluid" src="https://www.volvocars.com/images/v/-/media/applications/pdpspecificationpage/my24/xc90-hybrid/pdp/xc90-hybrid-gallery-4-16x9.jpg?iar=0&w=1920" />
+      </div>
+      <div class="col-6">
+        <video class="w-100" autoplay loop muted>
+          <source src="https://www.volvocars.com/images/v/-/media/applications/pdpspecificationpage/my24/xc90-hybrid/pdp/xc90-hybrid-gallery-5-1x1-video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+  <section class="row justify-content-center g-3">
+    <div class="col-4">
+      <h2>
+        Redefine your experience. <br /> You’re one step closer to <br /> more considerate mobility.
+      </h2>
+      <div class="row g-5">
+        <div class="col-6">
+          <strong>77 <sub>km</sub></strong>
+          <p>Electric range</p>
+        </div>
+        <div class="col-6">
+          <strong>462 <sub>hp</sub></strong>
+          <p>Power</p>
+        </div>
+        <div class="col-6">
+          <strong>40 <sub>g/km</sub></strong>
+          <p>CO2 Emissions</p>
+        </div>
+        <div class="col-6">
+          <strong>1.8 <sub>l/100km</sub></strong>
+          <p>Fuel consumption</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 d-flex flex-column">
+      <div>
+        <h5>No compromises</h5>
+        <p>
+          Add electric power to your everyday drive and enjoy a plug-in hybrid that considers tomorrow without compromising today’s experience.
+        </p>
+      </div>
+      <div>
+        <h5>Charge smarter, charge faster</h5>
+        <p>
+          Your XC90 Recharge will replenish its energy faster to charge from 0 to 100 per cent in three hours with our new 6.4kW 2-phase onboard charger, giving you more pure electric driving time covering more considerate miles.*
+        </p>
+      </div>
+      <div>
+        <h5>Agility to go</h5>
+        <p>
+
+          With one pedal drive and all-wheel drive, the XC90 Recharge performs with agility while delivering relaxed control and a smooth, powerful drive.
+        </p>
+      </div>
+      <div>
+        <button class="btn">Book test drive</button>
+      </div>
+    </div>
+  </section>
+  </div>

@@ -1,0 +1,28 @@
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  line-height: 1;
+  width: 100%;
+}
+
+.carousel{
+  padding:0;
+  margin:0;
+}
+
+#whatsapp-button {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+}
+
+section:nth-child(2){
+  padding:100px 0;
+}
+
+
+.btn{
+  background-color:#2a609d;
+  color:white;
+}

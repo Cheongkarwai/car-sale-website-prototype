@@ -1,0 +1,20 @@
+<div class="container-fluid py-5 download-brochure-container">
+  <div class="d-flex justify-content-center">
+    <h1>
+      Download a brochure
+    </h1>
+
+  </div>
+  <section class="row g-5 download-brochure-section">
+    <div class="col-4" *ngFor="let car of cars">
+      <div class="d-flex align-items-center flex-column">
+        <span class="car-title">{{car.name}}</span>
+        <img class="img-fluid" [src]="car.image" width="250" height="250" />
+        <button class="btn mt-5" (click)="downloadPdf(car.pdfUrl,car.fileName)">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          Download Brochure</button>
+      </div>
+    </div>
+  </section>
+</div>
+
