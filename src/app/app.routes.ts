@@ -26,6 +26,9 @@ export const routes: Routes = [
   {path: 'download-brochure', component: DownloadBrochureComponent},
   {path: 'find-us', component: FindUsComponent},
   {path: 'volvo-selekt',component:UsedCarListingComponent},
+  {path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'car-details/:id', component: CarDetailsComponent, children: [
       {
@@ -46,10 +49,6 @@ export const routes: Routes = [
   {
     path: 'volvo-selekt',
     component: UsedCarListingComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
   },
   {
     path: 'admin',
