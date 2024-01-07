@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
-import {environment} from "../../environment/environment";
 import {MatCardModule} from "@angular/material/card";
 import {CarService} from "../../core/service/car.service";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
@@ -11,6 +10,7 @@ import {Page} from "../../core/model/page.interface";
 import {BreadcrumbHeaderComponent, BreadcrumbRoute} from "../../core/component/header/header.component";
 import {ImageViewerComponent} from "../../core/component/image-viewer/image-viewer.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-used-car-listing',

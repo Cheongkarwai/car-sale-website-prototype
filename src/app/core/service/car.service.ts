@@ -9,8 +9,8 @@ import {Color} from "../model/color.interface";
 import {Condition} from "../model/condition.interface";
 import {CarModel} from "../model/car-model.interface";
 import {CarForm} from "../model/car-form.interface";
-import {environment} from "../../environment/environment";
 import {UsedCarForm} from "../model/used-car-form.interface";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'

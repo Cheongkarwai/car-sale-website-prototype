@@ -12,9 +12,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {register} from "swiper/element/bundle";
 import {ChatNowBtnComponent} from "../../../core/component/chat-now-btn/chat-now-btn.component";
 import {DeviceDetectorService} from "ngx-device-detector";
-import {environment} from "../../../environment/environment";
 import {ImageViewerComponent} from "../../../core/component/image-viewer/image-viewer.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-overview',
@@ -60,10 +60,6 @@ export class OverviewComponent implements OnInit,AfterViewInit {
 
   }
 
-  bookNow(model: string) {
-    window.open(` https://wa.me/${environment.contact_number}?text=I am interested in model ${model}`, 'self');
-
-  }
   openImageDialog(url:string) {
     const ref = this.dialog.open(ImageViewerComponent, {
       data: {url:url},

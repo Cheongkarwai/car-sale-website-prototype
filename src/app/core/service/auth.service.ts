@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Account, GrantedAuthority} from "../model/account.interface";
 import {Token} from "../model/token.interface";
 import {Authority} from "../model/authority.interface";
-import {environment} from "../../environment/environment";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'

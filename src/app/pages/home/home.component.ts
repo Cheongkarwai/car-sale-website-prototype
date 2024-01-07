@@ -34,13 +34,13 @@ import {
 import {AppointmentService} from "../../core/service/appointment.service";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {AppointmentFormComponent} from "../../core/component/appointment-form/appointment-form.component";
-import {environment} from "../../environment/environment";
 import {MatButtonModule} from "@angular/material/button";
 import {GoogleMapsModule} from "@angular/google-maps";
 import {GoogleMapComponent} from "../../core/component/google-map/google-map.component";
 import {ChatNowBtnComponent} from "../../core/component/chat-now-btn/chat-now-btn.component";
 import {ImageViewerComponent} from "../../core/component/image-viewer/image-viewer.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {environment} from "../../../environments/environment";
 
 
 @Component({

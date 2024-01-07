@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {environment} from "../../environment/environment";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-footer',
@@ -10,8 +10,7 @@ import {environment} from "../../environment/environment";
 })
 export class FooterComponent {
 
-  protected readonly environment = environment;
-
+  protected  readonly environment = environment;
   initiateWhatsapp(message:string) {
     window.open(` https://wa.me/${environment.contact_number}?text=${message}`, 'self');
   }
