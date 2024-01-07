@@ -1,0 +1,32 @@
+<div class="container-fluid">
+<app-breadcrumb-header [routes]="routes"></app-breadcrumb-header>
+  <section class="row justify-content-center py-5">
+    <div class="col-md-8 text-center pb-5 border-bottom">
+      <h2 class="title pb-5">Volvo Quality Used Cars</h2>
+      <p class="pb-5">A full selection of Volvo SELEKT and Quality Used Cars available from Volvo Car Authorized Dealers in Malaysia.
+        <br />
+        Freedom to Move in a personal, sustainable and safe way.</p>
+      <button mat-stroked-button color="primary" (click)="initiateWhatsapp('I am interested in used car')">Whatsapp us</button>
+    </div>
+  </section>
+  <section class="row justify-content-center pb-5">
+    <div class="col-md-8 text-center">
+      <ng-template #loading></ng-template>
+      <div class="row" *ngIf="(usedCars$ | async) as usedCars;else loading;">
+        <div class="col-md-4" *ngFor="let usedCar of usedCars.content">
+          <mat-card>
+            <img mat-card-image class="cursor-pointer" [ngSrc]="usedCar.model_image" width="400" height="200" [alt]="usedCar.model" (click)="openImageDialog(usedCar.model_image)"/>
+            <mat-card-content class="pb-3 pt-2 text-start">
+              <h3>{{usedCar.model}}</h3>
+              <p >Starting from {{usedCar.starting_price | currency : 'MYR'}}</p>
+              <p >Milleage:  {{usedCar.milleage}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-stroked-button color="primary" class="w-100" (click)="initiateWhatsapp('I am interested in '+usedCar.model+' (Used Car)')">Whatsapp us now</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

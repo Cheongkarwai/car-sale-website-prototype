@@ -8,29 +8,17 @@
         <h5 class="text-uppercase mb-4 text-dark">About company</h5>
 
         <p class="text-dark">
-          Founded in 1927, the Volvo Group is committed to shaping the future landscape of sustainable transport and infrastructure solutions.
+          Gilbert Volvo Sisma Sungai Besi is located at No.855 Lebuhraya Sungai Besi 57100 Kuala Lumpur, Malaysia
 
-          Every day our customers use our products and services to transport, deliver, build, and ferry goods, objects and people around the world.  Our products and services help to put food on our tables, carry people to work or school, build roads, keep our cities clean and much, much more, effectively helping to to meet the growing demands of our world.
         </p>
 
-        <p class="text-dark">
-          The Volvo Group drives prosperity through transport and infrastructure solutions, offering trucks, buses, construction equipment, power solutions for marine and industrial applications, financing and services that increase our customers’ uptime and productivity
-        </p>
-
-        <p class="text-dark">
-          Volvo Group is headquartered in Gothenburg, Sweden, employs around 104,000 people and serves customers in almost 190 markets. In 2022, net sales amounted to SEK 473 billion (EUR 44.5 billion). Volvo shares are listed on Nasdaq Stockholm.
-        </p>
 
         <div class="mt-4">
           <!-- Facebook -->
-          <a type="button" class="btn"><i class="fab fa-facebook-f"></i></a>
+          <a type="button" class="btn" [href]="environment.facebook_page_link" target="_blank"><i class="fab fa-facebook-f"></i></a>
           <!-- Dribbble -->
-          <a type="button" class="btn"><i class="fab fa-dribbble"></i></a>
+          <a type="button" class="btn" (click)="initiateWhatsapp('I am interested')"><i class="fab fa-whatsapp"></i></a>
           <!-- Twitter -->
-          <a type="button" class="btn"><i class="fab fa-twitter"></i></a>
-          <!-- Google + -->
-          <a type="button" class="btn"><i class="fab fa-google-plus-g"></i></a>
-          <!-- Linkedin -->
         </div>
       </div>
       <!--Grid column-->
@@ -41,10 +29,13 @@
 
         <ul class="fa-ul" style="margin-left: 1.65em;">
           <li class="mb-3">
-            <span class="fa-li"><i class="fas fa-home text-dark"></i></span><span class="ms-2 text-dark">Warsaw, 00-967, Poland</span>
+            <span class="fa-li"><i class="fas fa-home text-dark"></i></span><span class="ms-2 text-dark">No.855 Lebuhraya Sungai Besi, Kuala Lumpur, Malaysia, 57100</span>
           </li>
           <li class="mb-3">
-            <span class="fa-li"><i class="fas fa-phone text-dark"></i></span><span class="ms-2 text-dark">+ 48 234 567 88</span>
+            <span class="fa-li"><i class="fas fa-phone text-dark"></i></span><span class="ms-2 text-dark">+6012-296 9789</span>
+          </li>
+          <li class="mb-3">
+            <span class="fa-li"><i class="fas fa-envelope text-dark"></i></span><a href="mailto: gilbert.lee73@gmail.com" class="ms-2 text-dark">gilbert.lee73&#64;gmail.com</a>
           </li>
         </ul>
       </div>
@@ -57,17 +48,18 @@
         <table class="table text-center text-white">
           <tbody class="fw-normal">
           <tr>
-            <td>Mon - Thu:</td>
-            <td>8am - 9pm</td>
+            <td>Monday - Friday:</td>
+            <td>9am-7pm</td>
           </tr>
           <tr>
-            <td>Fri - Sat:</td>
-            <td>8am - 1am</td>
+            <td>Saturday:</td>
+            <td>9am-5pm</td>
           </tr>
           <tr>
             <td>Sunday:</td>
-            <td>9am - 10pm</td>
+            <td>10am-5pm</td>
           </tr>
+
           </tbody>
         </table>
       </div>
@@ -79,8 +71,8 @@
 
   <!-- Copyright -->
   <div class="text-center p-3 text-dark" style="background-color: rgba(0, 0, 0, 0.1);">
-    © 2020 Copyright:
-    <a class="text-white text-dark" href="https://mdbootstrap.com/">Cheong</a>
+    © 2024 Copyright
+    <a class="text-white text-dark"></a>
   </div>
   <!-- Copyright -->
 </footer>

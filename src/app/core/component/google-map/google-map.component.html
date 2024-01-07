@@ -1,0 +1,15 @@
+<ng-container *ngIf="(apiLoaded | async);else loading;">
+  <google-map width="100%"
+              [center]="center"
+              [zoom]="zoom"
+              (mapClick)="addMarker($event)">
+    <map-marker [position]="markerPosition" [options]="markerOptions" />
+
+  </google-map>
+</ng-container>
+<ng-template #loading>
+  <div class="d-flex justify-content-center flex-column loading-container vh-80">
+    <mat-spinner class="mt-5" style="margin:0 auto;"
+                 mode="indeterminate"></mat-spinner>
+  </div>
+</ng-template>

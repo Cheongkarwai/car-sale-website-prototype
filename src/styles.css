@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
-  font-family: 'Lato Regular';
+  font-family: 'Neon Light';
   src: url('assets/fonts/Lato/Lato-Regular.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -13,6 +13,44 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Montserrat Extra Bold';
+  src: url('assets/fonts/Montserrat/static/Montserrat-ExtraBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neon Bold';
+  src: url('assets/fonts/Lato/Lato-Bold.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
 *{
-  font-family: Montserrat, serif;
+  font-family: 'Neon Light',Montserrat, serif;
+}
+
+
+.bg-white-gray{
+  background-color: #f4f4f4;
+}
+
+.bg-light-gray{
+  background-color:#D3D3D3
+}
+
+html, body { height: 100%; }
+
+.vh-50{
+  min-height:50vh;
+}
+
+.carousel-image {
+  height: 300px;
+  object-fit: cover; // here
+}
+
+.cursor-pointer{
+  cursor:pointer;
 }

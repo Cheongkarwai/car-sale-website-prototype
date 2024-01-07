@@ -1,0 +1,69 @@
+<div class="container-fluid p-4">
+  <div class="row g-3">
+    <ng-container *ngIf="(count$ | async) as count">
+      <div class="col-sm-12 col-md-4 col-xs-4">
+        <div class="aqua-gradient color-block z-depth-1 p-3 shadow rounded pending">
+          <span class="weight-bold h6">Total of Pending Appointment</span>
+          <div class="d-flex justify-content-between align-items-center">
+            <i class="fa-solid fa-clock text-50 color-gray"></i>
+            <span class="weight-bold h6 text-50" [countUp]="count['PENDING']" [duration]="1000"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 col-xs-4">
+        <div class="aqua-gradient color-block z-depth-1 p-3 shadow rounded completed">
+          <span class="weight-bold h6">Total of Completed Appointment</span>
+          <div class="d-flex justify-content-between align-items-center">
+            <i class="fa-solid fa-circle-check text-50 color-gray"></i>
+            <span class="weight-bold h6 text-50" [countUp]="count['COMPLETED']" [duration]="1000"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 col-xs-4">
+        <div class="aqua-gradient color-block z-depth-1 p-3 shadow rounded cancelled">
+          <span class="weight-bold h6">Total of Cancelled Appointment</span>
+          <div class="d-flex justify-content-between align-items-center">
+            <i class="fa-solid fa-ban text-50 color-gray"></i>
+            <span class="weight-bold h6 text-50" [countUp]="count['CANCELLED']" [duration]="1000"></span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="col-sm-12 col-md-6 col-xs-12">
+      <!--      <div class="shadow p-3 mb-5 bg-white rounded" *ngIf="{ months: (months$ | async) ?? [] , data: (appointmentsGroupByMonth$ | async) ?? [] } as barChart">-->
+      <!--        <app-bar-chart [labels]="barChart.months" [data]="barChart.data"></app-bar-chart>-->
+      <!--      </div>-->
+      <div class="shadow p-3 mb-5 bg-white rounded">
+        <canvas id="myChart">
+        </canvas>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-xs-12">
+      <div class="shadow p-3 mb-5 bg-white rounded" style="max-height:320px;">
+        <h3>Your recent appointments</h3>
+        <ng-container *ngIf="(appointments$ | async) as appointments;else loading;">
+          <cdk-virtual-scroll-viewport style="min-height:250px;" [itemSize]="50" *ngIf="appointments.content.length;else notFound;">
+            <summary class="p-3 border my-3 rounded" *cdkVirtualFor="let appointment of appointments.content">
+              <div class="card-body">
+                <h3 class="card-title">Appointment #ID {{appointment.id}}</h3>
+                <p>Contact Number: {{appointment.contactNumber}}</p>
+                <p>Timestamp: {{appointment.timestamp | date : 'short'}}</p>
+                <a href="#" class="btn btn-outline-secondary">View Details</a>
+              </div>
+            </summary>
+          </cdk-virtual-scroll-viewport>
+          <ng-template #notFound>
+            No appointment.
+          </ng-template>
+        </ng-container>
+        <ng-template #loading>
+          <div class="d-flex justify-content-center flex-column loading-container vh-80">
+            <span class="text-center">Loading.. Please contact admin if it is still loading 10 minutes</span>
+            <mat-spinner class="my-5" style="margin:0 auto;"
+                         mode="indeterminate"></mat-spinner>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

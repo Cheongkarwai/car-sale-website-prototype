@@ -8,15 +8,16 @@
     <div class="col-6">
       <div class="purple-gradient color-block z-depth-1 p-3 shadow bg-white rounded d-flex flex-column">
         <span class="text-dark weight-bold h5"><i class="fa-regular fa-map"></i> Location</span>
-        <ng-container *ngIf="(apiLoaded | async)">
-          <google-map width="100%"
-                      [center]="center"
-                      [zoom]="zoom"
-                      (mapClick)="addMarker($event)">
-            <map-marker [position]="markerPosition" [options]="markerOptions" />
+<!--        <ng-container *ngIf="(apiLoaded | async)">-->
+<!--          <google-map width="100%"-->
+<!--                      [center]="center"-->
+<!--                      [zoom]="zoom"-->
+<!--                      (mapClick)="addMarker($event)">-->
+<!--            <map-marker [position]="markerPosition" [options]="markerOptions" />-->
 
-          </google-map>
-        </ng-container>
+<!--          </google-map>-->
+<!--        </ng-container>-->
+        <app-google-map></app-google-map>
       </div>
     </div>
     <div class="col-6">

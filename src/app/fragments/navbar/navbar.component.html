@@ -1,54 +1,39 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-3 w-100">
-  <a class="navbar-brand">
+  <a class="navbar-brand" routerLink="">
     <img classs="img-responsive" width="130px" src="https://www.volvocars.com/static/shared/images/volvo-wordmark-black.svg" alt="volvo" />
   </a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse justify-content-end">
+  <div [ngClass]="isCollapsed ? 'navbar-collapse justify-content-end' : 'collapse navbar-collapse justify-content-end'">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown _megaMenu" ngbDropdown display="dynamic" placement="bottom-end">
-        <button
-          class="nav-link dropdown-toggle"
-          href="#"
-          ngbDropdownToggle
-          (click)="toggleMegaMenu()"
-        >
-          Explore
-          <!--          Dropdown-->
-          <small><i [ngClass]="isMegaMenuVisible ? 'fa-solid fa-chevron-up ms-2' : 'fa-solid fa-chevron-down ms-2'"></i></small>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>
-          <ul>
-            <li *ngFor="let carModel of carModels">
-              <a class="dropdown-item" routerLink="/car-details">
-                <img class="img-thumbnail"
-                   [src]="carModel.image"
-                   alt="xc90"/>
-                <div class="d-flex flex-column align-items-center">
-                  <div class="model-name">{{carModel.name}}</div>
-                  <div class="model-price">From {{carModel.price | currency :'MYR'}}</div>
-                </div>
-              </a>
-            </li>
-          </ul>
+<!--      <li class="nav-item dropdown _megaMenu" ngbDropdown display="dynamic" placement="bottom-end">-->
+<!--        <button-->
+<!--          class="nav-link dropdown-toggle"-->
+<!--          href="#"-->
+<!--          ngbDropdownToggle-->
+<!--        >-->
+<!--          Explore-->
+<!--          &lt;!&ndash;          Dropdown&ndash;&gt;-->
+<!--          <small><i [ngClass]="isMegaMenuVisible ? 'fa-solid fa-chevron-up ms-2' : 'fa-solid fa-chevron-down ms-2'"></i></small>-->
+<!--        </button>-->
+<!--        <div class="dropdown-menu" aria-labelledby="navbarDropdown" ngbDropdownMenu>-->
 <!--          <ul>-->
-<!--            <li>-->
-<!--              <a class="dropdown-item border" href="">-->
-<!--                <img src=""/>-->
-<!--                <div class="justify-content-center">-->
-<!--                  <div>Download Brochure</div>-->
+<!--            <li *ngFor="let carModel of carModels">-->
+<!--              <a class="dropdown-item" routerLink="/car-details">-->
+<!--                <img class="img-thumbnail"-->
+<!--                   [src]="carModel.image"-->
+<!--                   alt="xc90"/>-->
+<!--                <div class="d-flex flex-column align-items-center">-->
+<!--                  <div class="model-name">{{carModel.name}}</div>-->
+<!--                  <div class="model-price">From {{carModel.price | currency :'MYR'}}</div>-->
 <!--                </div>-->
 <!--              </a>-->
 <!--            </li>-->
-<!--            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>-->
-<!--            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>-->
-<!--            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>-->
-<!--            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>-->
 <!--          </ul>-->
-        </div>
-      </li>
+<!--        </div>-->
+<!--      </li>-->
       <li class="nav-item">
         <a class="nav-link" (click)="openEnd(content)">Menu</a>
       </li>
@@ -65,12 +50,103 @@
     <nav>
       <ul  class="offcanvas-ul">
         <li>
+          <a class="py-3 ps-2 text-dark" href="#new-car" >Explore New Car</a>
+        </li>
+        <li>
+          <a class="py-3 ps-2 text-dark" routerLink="/volvo-selekt">Volvo SELEKT</a>
+        </li>
+        <li>
           <a class="py-3 ps-2 text-dark" routerLink="/download-brochure">Download Brochure</a>
+        </li>
+        <li>
+          <a class="py-3 ps-2 text-dark" href="#test-drive-form" (click)="navigateToTestDriveSection()">Book Test Drive</a>
         </li>
         <li>
          <a class="py-3 ps-2 text-dark" routerLink="/find-us">Find Us</a>
         </li>
       </ul>
+      <ul  class="offcanvas-ul" *ngIf="isAdmin">
+        <li>
+          <h2 class="py-3 ps-2 text-dark">Admin Section</h2>
+        </li>
+        <li>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/dashboard">Dashboard</a>
+        </li>
+        <li>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/car">Manage Car</a>
+        </li>
+        <li>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/appointment/manage-appointment">Manage Appointment</a>
+        </li>
+        <li>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/user/manage-user">Manage User</a>
+        </li>
+        <li>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/profile">Profile</a>
+        </li>
+        <li>
+          <a class="py-3 ps-2 text-dark" (click)="logout($event)">Logout</a>
+        </li>
+      </ul>
     </nav>
   </div>
 </ng-template>
+
+
+<!--<ng-template #bookTestDriving let-offcanvas1>-->
+<!--  <div class="offcanvas-header">-->
+<!--    <h4 class="offcanvas-title">Offcanvas title</h4>-->
+<!--    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas1.dismiss('Cross click')"></button>-->
+<!--  </div>-->
+<!--  <div class="offcanvas-body">-->
+<!--    <p>One fine body&hellip;</p>-->
+<!--    <div class="text-end">-->
+<!--      <button type="button" class="btn btn-outline-dark" (click)="offcanvas1.dismiss('Close click')">Close</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</ng-template>-->
+
+<!--<ng-template #adminCanvas let-offcanvas1>-->
+<!--  <div class="offcanvas-header">-->
+<!--    <img classs="img-responsive" width="130px" src="https://www.volvocars.com/static/shared/images/volvo-wordmark-black.svg" alt="volvo" />-->
+<!--    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas1.dismiss('Cross click')"></button>-->
+<!--  </div>-->
+<!--  <div class="offcanvas-body">-->
+<!--   <nav>-->
+<!--     <ul  class="offcanvas-ul">-->
+<!--       <li>-->
+<!--         <a class="py-3 ps-2 text-dark" routerLink="/admin/dashboard">Dashboard</a>-->
+<!--       </li>-->
+<!--       <li>-->
+<!--         <a class="py-3 ps-2 text-dark" routerLink="/admin/add-car">Manage Car</a>-->
+<!--       </li>-->
+<!--       <li>-->
+<!--         <a class="py-3 ps-2 text-dark" routerLink="/admin/appointment/manage-appointment">Manage Appointment</a>-->
+<!--       </li>-->
+<!--       <li>-->
+<!--         <a class="py-3 ps-2 text-dark" routerLink="/admin/user/manage-user">Manage User</a>-->
+<!--       </li>-->
+<!--       <li>-->
+<!--         <a class="py-3 ps-2 text-dark" routerLink="/admin/profile">Profile</a>-->
+<!--       </li>-->
+<!--     </ul>-->
+<!--   </nav>-->
+<!--  </div>-->
+<!--</ng-template>-->
+
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light px-3 w-100" *ngIf="isAdmin">-->
+<!--  <a class="navbar-brand" routerLink="">-->
+<!--    <img classs="img-responsive" width="130px" src="https://www.volvocars.com/static/shared/images/volvo-wordmark-black.svg" alt="volvo" />-->
+<!--  </a>-->
+<!--  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"-->
+<!--          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">-->
+<!--    <span class="navbar-toggler-icon"></span>-->
+<!--  </button>-->
+<!--  <div [ngClass]="isCollapsed ? 'navbar-collapse justify-content-end' : 'collapse navbar-collapse justify-content-end'">-->
+<!--    <ul class="navbar-nav ml-auto">-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" (click)="openEnd(adminCanvas)">Menu</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</nav>-->

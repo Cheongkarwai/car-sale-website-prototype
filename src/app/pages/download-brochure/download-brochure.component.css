@@ -2,21 +2,25 @@
 
 h1{
   font-size:25px;
+  font-family: 'Neon Light',Montserrat, serif;
+
 }
 
-.download-brochure-container{
-  height:50vh;
-}
 
 .car-title{
   font-size:20px;
 }
 
 .download-brochure-section{
-  padding: 60px 250px 0;
+  min-height:50vh;
 }
 
 .btn{
   background-color:#2a609d;
   color:white;
+}
+
+.title{
+  font-size:25px;
+  font-weight:500;
 }

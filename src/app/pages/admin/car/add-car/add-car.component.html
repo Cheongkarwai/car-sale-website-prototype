@@ -1,0 +1,149 @@
+<div class="container-fluid py-5 vh-50">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2>Add New Car</h2>
+      <form [formGroup]="addNewCarForm" class="p-3 border rounded-1" (ngSubmit)="submitForm($event)">
+        <div class="row py-3">
+          <div class="col-md-6">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>Brand</mat-label>
+              <mat-select formControlName="brand">
+                <mat-option [value]="'Volvo'">Volvo</mat-option>
+              </mat-select>
+              <mat-error *ngIf="addNewCarForm.get('brand')?.hasError('required')">
+                Brand is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>Model</mat-label>
+              <input matInput type="text" formControlName="model"/>
+              <mat-error *ngIf="addNewCarForm.get('model')?.hasError('required')">
+                Model is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row py-3">
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>Starting price</mat-label>
+              <input matInput type="number" formControlName="price"/>
+              <mat-error *ngIf="addNewCarForm.get('price')?.hasError('required')">
+                Price is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>Condition</mat-label>
+              <mat-select formControlName="condition" (selectionChange)="onSelectCondition($event)">
+                <mat-option [value]="">Please select a condition</mat-option>
+                <mat-option [value]="'USED'">Used</mat-option>
+                <mat-option [value]="'NEW'">New</mat-option>
+              </mat-select>
+              <mat-error *ngIf="addNewCarForm.get('condition')?.hasError('required')">
+                Condition is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+              <mat-label>Milleage</mat-label>
+              <input matInput type="number" formControlName="milleage"/>
+              <mat-error *ngIf="addNewCarForm.get('milleage')?.hasError('required')">
+                Milleage is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row" formArrayName="features" *ngIf="addNewCarForm.controls['condition'].getRawValue() === 'NEW'">
+          <ng-container *ngFor="let feature of featureFormArrayControls;let i = index;" [formGroupName]="i">
+            <div class="col-md-12 py-3">
+              <mat-label>Feature {{i + 1}}</mat-label>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <mat-label>Category</mat-label>
+                <input matInput type="text" formControlName="category"/>
+                <mat-error *ngIf="feature.get('category')?.getError('required')">
+                  Category is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-8">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <mat-label>Title</mat-label>
+                <input matInput type="text" formControlName="title"/>
+                <mat-error *ngIf="feature.get('title')?.getError('required')">
+                  Title is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12 py-3">
+              <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" formControlName="description"/>
+                <mat-error *ngIf="feature.get('description')?.getError('required')">
+                  Description is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <app-upload-file (uploadFile)="uploadFeatureImage($event,i)" [multiple]="false"
+                               [format]="'.png,.jpeg,.jpg'"></app-upload-file>
+            </div>
+          </ng-container>
+        </div>
+        <div class="row py-5" *ngIf="addNewCarForm.controls['condition'].getRawValue() === 'NEW'">
+          <div class="col-md-12">
+            <button mat-mini-fab class="me-3" color="primary" type="text"
+                    aria-label="Example icon button with a menu icon" (click)="addNewFeature()" type="button">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" *ngIf="featureFormArray.length > 1"
+                    aria-label="Example icon button with a menu icon" (click)="removeLastFeature()" type="button">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12">
+                <mat-label>Car Model Image</mat-label>
+              </div>
+              <div class="col-md-12 pb-5">
+                <app-upload-file (uploadFile)="uploadCarModelImage($event)" [multiple]="false" [format]="'.png,.jpeg,.jpg'"></app-upload-file>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="addNewCarForm.controls['condition'].getRawValue() === 'NEW'">
+            <div class="row">
+              <div class="col-md-12">
+                <mat-label>Brochure</mat-label>
+              </div>
+              <div class="col-md-12 pb-5">
+                <app-upload-file (uploadFile)="uploadCarBrochure($event)" [multiple]="false" [format]="'.pdf'"></app-upload-file>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center" *ngIf="addNewCarForm.controls['condition'].getRawValue() === 'NEW'">
+          <div class="col-md-12 pb-5">
+            <mat-label>Exterior Images</mat-label>
+            <app-upload-file (uploadFile)="uploadExteriorImages($event)" [multiple]="true" [format]="'.png,.jpeg,.jpg'"></app-upload-file>
+          </div>
+        </div>
+        <div class="row justify-content-center" *ngIf="addNewCarForm.controls['condition'].getRawValue() === 'NEW'">
+          <div class="col-md-12 pb-5">
+            <mat-label>Interior Images</mat-label>
+            <app-upload-file (uploadFile)="uploadInteriorImages($event)" [multiple]="true" [format]="'.png,.jpeg,.jpg'"></app-upload-file>
+          </div>
+        </div>
+        <button mat-flat-button type="submit" color="primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

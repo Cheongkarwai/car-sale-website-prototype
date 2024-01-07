@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <h3 class="text-center">Book a Test Drive Today</h3>
+  <div class="col-md-8 pt-5">
+    <form [formGroup]="testDriveForm" (ngSubmit)="submitForm($event)">
+      <div class="row py-2">
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width w-100" floatLabel="always" [color]="color" appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input formControlName="email_address" matInput placeholder="Enter your email address">
+            <mat-error *ngIf="testDriveForm.controls['email_address'].hasError('required')">Email is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row py-2">
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width w-100" floatLabel="always" [color]="color" appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input formControlName="full_name" matInput placeholder="Enter your full name">
+            <mat-error *ngIf="testDriveForm.controls['full_name'].hasError('required')">Full name is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row py-2">
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width w-100" floatLabel="always" [color]="color" appearance="outline">
+            <mat-label>Contact Number</mat-label>
+            <input formControlName="contact_number" matInput placeholder="Enter your contact number">
+            <mat-error *ngIf="testDriveForm.controls['contact_number'].hasError('required')">Contact Number is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row py-2">
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width w-100" floatLabel="always" [color]="color" appearance="outline">
+            <mat-label>Select your model</mat-label>
+            <mat-select formControlName="model_name">
+              <ng-container>
+                <mat-option value="">Please select a model</mat-option>
+                <mat-option *ngFor="let car of cars" [value]="car.model">
+                  {{car.model}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="testDriveForm.controls['model_name'].hasError('required')">Please select a model</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row py-2">
+        <div class="col-md-12">
+          <mat-form-field class="example-full-width w-100 text-white" floatLabel="always" [color]="color" appearance="outline" >
+            <mat-label>Remarks (optional)</mat-label>
+            <textarea formControlName="remarks" matInput placeholder="Enter remarks"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row py-2">
+        <div class="col-md-12">
+          <button type="submit" class="w-100" mat-flat-button color="primary">Book Test Drive Appointment
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

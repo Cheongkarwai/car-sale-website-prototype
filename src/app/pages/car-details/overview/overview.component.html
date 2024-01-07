@@ -1,1 +1,142 @@
-<p>overview works!</p>
+<div *ngIf="(carDetails$ | async) as carDetails">
+  <section class="row justify-content-center pt-5">
+    <div class="col-md-8 row">
+      <div class="col-md-6 px-5 pt-5">
+      <span class="h3">
+        Right here. Right now. Why wait to <br/> make the switch? Turn your everyday <br/> journeys with our car.
+      </span>
+      </div>
+      <div class="col-md-6 pt-5">
+        <div class="px-5">
+          <!--          <h4>{{'Starting from ' + carDetails.starting_price | currency : 'MYR'}}</h4>-->
+          <h3 class="price">Starting From {{carDetails.starting_price | currency : 'MYR'}}</h3>
+          <app-chat-now-btn [socialMedia]="'whatsapp'" [text]="'Inquiry now'"
+                            [message]="'I am interested in '+carDetails.model"></app-chat-now-btn>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--    <section class="row justify-content-center">-->
+  <!--      <div class=" col-6 row g-3">-->
+  <!--        <div class="col-12">-->
+  <!--          <img src="https://car-file-server.sgp1.digitaloceanspaces.com/cheong/overview-bg-image/ext%20XC90%20volvo-1.png"width="100%" height="100%" />-->
+  <!--        </div>-->
+  <!--        <div class="col-6">-->
+  <!--          <img src="https://car-file-server.sgp1.digitaloceanspaces.com/cheong/overview-bg-image/ext%20XC90%20volvo-1.png"width="100%" height="100%" />-->
+  <!--        </div>-->
+  <!--        <div class="col-6">-->
+  <!--          <img src="https://car-file-server.sgp1.digitaloceanspaces.com/cheong/overview-bg-image/ext%20XC90%20volvo-1.png"width="100%" height="100%" />-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </section>-->
+  <section class="row justify-content-center">
+    <div class="col-md-8">
+      <h2>Interior</h2>
+      <ng-container *ngIf="carDetails.interior_images.length;else notFound;">
+        <swiper-container fmSwiper [config]="config" init="false">
+          <swiper-slide *ngFor="let interiorImage of carDetails.interior_images">
+            <div class="card">
+              <img
+                [ngSrc]="interiorImage.path" width="400" height="200"
+                class="card-img-top carousel-image cursor-pointer" [alt]="carDetails.model" (click)="openImageDialog(interiorImage.path)">
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </ng-container>
+    </div>
+  </section>
+  <section class="row justify-content-center">
+    <div class="col-md-8">
+      <h2>Exterior</h2>
+      <ng-container *ngIf="carDetails.exterior_images.length;else notFound;">
+        <swiper-container fmSwiper [config]="config" init="false">
+          <swiper-slide *ngFor="let exteriorImage of carDetails.exterior_images">
+            <div class="card">
+              <img
+                [ngSrc]="exteriorImage.path" width="400" height="200"
+                class="card-img-top carousel-image cursor-pointer" [alt]="carDetails.model" (click)="openImageDialog(exteriorImage.path)">
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </ng-container>
+    </div>
+  </section>
+  <ng-template #notFound>
+    Not Available
+  </ng-template>
+  <section class="row justify-content-center g-3">
+    <div class="col-md-4">
+      <h2>
+        Redefine your experience. <br/> You’re one step closer to <br/> more considerate mobility.
+      </h2>
+      <div class="row g-5">
+<!--        <div class="col-6">-->
+<!--          <strong>77 <sub>km</sub></strong>-->
+<!--          <p>Electric range</p>-->
+<!--        </div>-->
+<!--        <div class="col-6">-->
+<!--          <strong>462 <sub>hp</sub></strong>-->
+<!--          <p>Power</p>-->
+<!--        </div>-->
+<!--        <div class="col-6">-->
+<!--          <strong>40 <sub>g/km</sub></strong>-->
+<!--          <p>CO2 Emissions</p>-->
+<!--        </div>-->
+<!--        <div class="col-6">-->
+<!--          <strong>1.8 <sub>l/100km</sub></strong>-->
+<!--          <p>Fuel consumption</p>-->
+<!--        </div>-->
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-12">
+          <div>
+            <h5>No compromises</h5>
+            <p>
+              Add electric power to your everyday drive and enjoy a plug-in hybrid that considers tomorrow without
+              compromising today’s experience.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h5>Charge smarter, charge faster</h5>
+        <p>
+          Your XC90 Recharge will replenish its energy faster to charge from 0 to 100 per cent in three hours with our
+          new 6.4kW 2-phase onboard charger, giving you more pure electric driving time covering more considerate
+          miles.*
+        </p>
+      </div>
+      <div>
+        <h5>Agility to go</h5>
+        <p>
+
+          With one pedal drive and all-wheel drive, the XC90 Recharge performs with agility while delivering relaxed
+          control and a smooth, powerful drive.
+        </p>
+      </div>
+      <app-chat-now-btn [socialMedia]="'whatsapp'" [text]="'Book test drive'"
+                        [message]="'Book test drive for '+carDetails.model"></app-chat-now-btn>
+    </div>
+  </section>
+  <section class="row justify-content-center" *ngIf="carDetails.features;">
+    <div class="col-md-8">
+      <h2 class="text-center">Explore the features</h2>
+      <p class="py-3 text-center">Features depicted may not be standard or available for all styles and engine
+        options.</p>
+      <div class="row">
+        <div class="col-md-3 py-2" *ngFor="let feature of carDetails.features">
+          <div class="card border-0" style="width: 18rem;">
+            <img class="card-img-top cursor-pointer" [ngSrc]="feature.image" width="400" height="200" [alt]="feature.title" (click)="openImageDialog(feature.image)">
+            <div class="card-body">
+              <h3 class="card-title">{{feature.title}}</h3>
+              <p class="card-text">{{feature.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

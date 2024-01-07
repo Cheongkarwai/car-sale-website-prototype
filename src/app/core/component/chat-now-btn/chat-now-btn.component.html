@@ -1,0 +1,18 @@
+
+
+<ng-container [ngSwitch]="socialMedia">
+  <ng-container *ngSwitchCase="'whatsapp'">
+    <button [class]="class" mat-flat-button   color="primary" (click)="chatNowWhatsapp()">
+      <mat-icon fontSet="fa-brands" style="font-size: 20px; color: green;" fontIcon="fa-whatsapp"></mat-icon>
+<!--      <mat-icon><i class="fa-brands fa-whatsapp pe-3"></i></mat-icon>-->
+      {{text}}
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'messenger'">
+    <button mat-flat-button   color="primary" (click)="chatNowMessenger()">
+      <mat-icon fontSet="fab" style="font-size: 18px; color: dodgerblue;" fontIcon="fa-facebook-messenger"></mat-icon>
+      {{text}}
+    </button>
+  </ng-container>
+</ng-container>
+

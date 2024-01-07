@@ -11,18 +11,49 @@
   margin:0;
 }
 
-#whatsapp-button {
-  position: fixed;
-  right: 20px;
-  bottom: 30px;
-}
-
 section:nth-child(2){
   padding:100px 0;
 }
 
-
-.btn{
-  background-color:#2a609d;
-  color:white;
+.card{
+  border:0;
 }
+
+.empty-btn{
+  text-decoration: none;
+  cursor:pointer;
+}
+
+
+.why-volvo-paragraph{
+  font-size:16px;
+}
+
+section:nth-child(3) img{
+  max-height:600px;
+  max-width:900px;
+}
+
+
+
+
+section:nth-child(3) h5,section h3{
+  font-weight:500;
+  font-family: 'Montserrat Extra Bold',Montserrat, serif;
+}
+
+section h3{
+  font-size:35px;
+}
+
+section:nth-child(3) h5{
+  font-size:20px;
+}
+
+
+h4{
+  font-size:25px;
+}
+
+
+

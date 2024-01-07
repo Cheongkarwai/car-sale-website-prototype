@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FooterComponent} from "./fragments/footer/footer.component";
 import {NavbarComponent} from "./fragments/navbar/navbar.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -13,5 +14,6 @@ import {NavbarComponent} from "./fragments/navbar/navbar.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  isAdmin = true;
   title = 'car-booking';
 }

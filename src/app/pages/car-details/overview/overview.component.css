@@ -1,0 +1,36 @@
+iframe {
+  width:100%;
+  height:800px;
+}
+
+fieldset{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+}
+
+
+section:nth-child(4){
+  padding:150px 0;
+}
+
+section:nth-child(2){
+  padding:150px 0;
+}
+
+section:nth-child(6){
+  padding:180px 0;
+}
+
+.price{
+  font-size:15px;
+}
+
+
+
+
+h2{
+  font-size:25px;
+  font-family:'Montserrat Extra Bold',serif;
+}

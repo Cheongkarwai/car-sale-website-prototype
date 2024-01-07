@@ -1,18 +1,13 @@
-<div class="container-fluid py-5 download-brochure-container">
-  <div class="d-flex justify-content-center">
-    <h1>
-      Download a brochure
-    </h1>
-
-  </div>
-  <section class="row g-5 download-brochure-section">
-    <div class="col-4" *ngFor="let car of cars">
+<div class="container-fluid py-5">
+ <app-breadcrumb-header [routes]="routes"></app-breadcrumb-header>
+  <section class="row g-5 pt-5 download-brochure-section">
+    <div class="col-md-3" *ngFor="let car of carModels$ | async">
       <div class="d-flex align-items-center flex-column">
-        <span class="car-title">{{car.name}}</span>
-        <img class="img-fluid" [src]="car.image" width="250" height="250" />
-        <button class="btn mt-5" (click)="downloadPdf(car.pdfUrl,car.fileName)">
-          <i class="fa-solid fa-file-arrow-down"></i>
-          Download Brochure</button>
+        <span class="car-title py-2">{{car.model}}</span>
+        <img class="carousel-image" [ngSrc]="car.model_image"  width="400" height="200" [alt]="car.model" />
+        <button mat-stroked-button color="primary" class="mt-4" (click)="downloadPdf('https://car-file-server.sgp1.digitaloceanspaces.com/Jalan%20Cheras%20Hartamas123/brochure/brochure-1','file.pdf')" >
+          <i class="fa-solid fa-file-arrow-down pe-2"></i>View Brochure
+        </button>
       </div>
     </div>
   </section>
