@@ -26,7 +26,7 @@
           <!--      <div>-->
           <swiper-slide *ngFor="let car of cars">
             <div class="card">
-              <img [ngSrc]="car.model_image"  width="400" height="300" class="card-img-top carousel-image cursor-pointer" [alt]="car.model" (click)="openImageDialog(car.model_image)">
+              <img [src]="car.model_image"  class="card-img-top carousel-image cursor-pointer" [alt]="car.model" (click)="openImageDialog(car.model_image)">
               <div class="card-body">
                 <h5 class="card-title">Model {{car.model}}</h5>
                 <p class="card-text">{{car.price | currency : 'MYR'}}</p>

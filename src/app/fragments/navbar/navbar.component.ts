@@ -67,14 +67,16 @@ export class NavbarComponent implements OnInit,AfterViewInit{
   }
 
 
-
-  navigateToTestDriveSection() {
+  closeNav() {
     this.offcanvasService.dismiss();
   }
 
 
   logout($event: MouseEvent) {
     this.authService.logout()
-      .subscribe(res=>this.router.navigateByUrl(''));
+      .subscribe(res=>{
+        this.router.navigateByUrl('');
+        window.location.reload();
+      });
   }
 }

@@ -13,9 +13,9 @@
     <div class="col-md-8 text-center">
       <ng-template #loading></ng-template>
       <div class="row" *ngIf="(usedCars$ | async) as usedCars;else loading;">
-        <div class="col-md-4" *ngFor="let usedCar of usedCars.content">
+        <div class="col-md-4 py-3" *ngFor="let usedCar of usedCars.content">
           <mat-card>
-            <img mat-card-image class="cursor-pointer" [ngSrc]="usedCar.model_image" width="400" height="200" [alt]="usedCar.model" (click)="openImageDialog(usedCar.model_image)"/>
+            <img mat-card-image class="cursor-pointer carousel-image" [src]="usedCar.model_image"  [alt]="usedCar.model" (click)="openImageDialog(usedCar.model_image)"/>
             <mat-card-content class="pb-3 pt-2 text-start">
               <h3>{{usedCar.model}}</h3>
               <p >Starting from {{usedCar.starting_price | currency : 'MYR'}}</p>

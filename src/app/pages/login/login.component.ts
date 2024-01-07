@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   isButtonLoading = false;
 
   constructor(private fb: FormBuilder, private snackbar: MatSnackBar, private authService: AuthService,
-              private router: Router) {
+              private router: Router, private ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -61,14 +61,15 @@ export class LoginComponent implements OnInit {
     this.isButtonLoading = true;
     this.snackbar.open('Authenticating user.. Please wait..', 'Close', {duration: 2000});
     setTimeout(() => {
+
       this.isButtonLoading = false;
       this.authService.login({username: this.username?.getRawValue(), password: this.password?.getRawValue()})
         .subscribe({
-          next: (res:Account) => {
+          next: (res: Account) => {
             this.authService.setUserInfo(res);
-            this.router.navigateByUrl('admin/dashboard')
-              .then(res =>
-                this.snackbar.open('Welcome back', 'Close', {duration: 1000})).then(window.location.reload);
+            this.router.navigateByUrl('/admin/dashboard')
+              .then(res=>window.location.reload());
+            this.snackbar.open('Welcome back', 'Close', {duration: 1000});
           },
           error: err => {
             if (err.status === 401) {

@@ -50,19 +50,19 @@
     <nav>
       <ul  class="offcanvas-ul">
         <li>
-          <a class="py-3 ps-2 text-dark" href="#new-car" >Explore New Car</a>
+          <a class="py-3 ps-2 text-dark" href="#new-car" (click)="closeNav()">Explore New Car</a>
         </li>
         <li>
-          <a class="py-3 ps-2 text-dark" routerLink="/volvo-selekt">Volvo SELEKT</a>
+          <a class="py-3 ps-2 text-dark" routerLink="/volvo-selekt" (click)="closeNav()">Volvo SELEKT</a>
         </li>
         <li>
-          <a class="py-3 ps-2 text-dark" routerLink="/download-brochure">Download Brochure</a>
+          <a class="py-3 ps-2 text-dark" routerLink="/download-brochure" (click)="closeNav()">Download Brochure</a>
         </li>
         <li>
-          <a class="py-3 ps-2 text-dark" href="#test-drive-form" (click)="navigateToTestDriveSection()">Book Test Drive</a>
+          <a class="py-3 ps-2 text-dark" href="#test-drive-form" (click)="closeNav()">Book Test Drive</a>
         </li>
         <li>
-         <a class="py-3 ps-2 text-dark" routerLink="/find-us">Find Us</a>
+         <a class="py-3 ps-2 text-dark" routerLink="/find-us" (click)="closeNav()">Find Us</a>
         </li>
       </ul>
       <ul  class="offcanvas-ul" *ngIf="isAdmin">
@@ -70,19 +70,19 @@
           <h2 class="py-3 ps-2 text-dark">Admin Section</h2>
         </li>
         <li>
-          <a class="py-3 ps-2 text-dark" routerLink="/admin/dashboard">Dashboard</a>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/dashboard" (click)="closeNav()">Dashboard</a>
         </li>
         <li>
-          <a class="py-3 ps-2 text-dark" routerLink="/admin/car">Manage Car</a>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/car" (click)="closeNav()">Manage Car</a>
         </li>
         <li>
-          <a class="py-3 ps-2 text-dark" routerLink="/admin/appointment/manage-appointment">Manage Appointment</a>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/appointment/manage-appointment" (click)="closeNav()">Manage Appointment</a>
         </li>
         <li>
-          <a class="py-3 ps-2 text-dark" routerLink="/admin/user/manage-user">Manage User</a>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/user/manage-user" (click)="closeNav()">Manage User</a>
         </li>
         <li>
-          <a class="py-3 ps-2 text-dark" routerLink="/admin/profile">Profile</a>
+          <a class="py-3 ps-2 text-dark" routerLink="/admin/profile" (click)="closeNav()">Profile</a>
         </li>
         <li>
           <a class="py-3 ps-2 text-dark" (click)="logout($event)">Logout</a>
