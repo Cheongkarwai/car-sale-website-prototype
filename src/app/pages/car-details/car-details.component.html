@@ -1,4 +1,7 @@
-<div class="container-fluid" *ngIf="(carDetails$ | async) as carDetails">
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>
+<div class="container-fluid" *ngIf="(carDetails$ | async) as carDetails;else loading;">
 
   <section class="row border-top justify-content-center py-5 bg-light">
     <div class="col-md-4 text-center">

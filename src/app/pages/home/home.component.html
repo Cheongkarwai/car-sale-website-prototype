@@ -1,40 +1,47 @@
 <ng-template #loading>
-  <div class="d-flex justify-content-center flex-column loading-container vh-80">
-    <mat-spinner class="mt-5" style="margin:0 auto;"
-                 mode="indeterminate"></mat-spinner>
-  </div>
+  <app-loading-progress></app-loading-progress>
 </ng-template>
-<div class="container-fluid" *ngIf="(carModels$ | async) as cars; else loading">
+<div class="container-fluid" *ngIf="(carModels$ | async) as cars;else loading">
   <section class="row">
-    @if (images) {
-    <ngb-carousel  [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
-      @for (image of images; track image) {
-    <ng-template ngbSlide>
-      <div class="picsum-img-wrapper border">
-        <img [src]="image" alt="Random slide" style="width:100%;max-height:500px;object-fit: cover;"/>
-      </div>
-    </ng-template>
-    }
+
+    <!--    @if (images) {-->
+    <ngb-carousel [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+      <!--      @for (image of images; track image) {-->
+      <ng-template ngbSlide *ngFor="let image of images">
+        <div class="picsum-img-wrapper border" style="opacity:0.9;">
+          <img [ngSrc]="image" alt="Random slide" class="img-fluid"
+               style="width:100%;max-height:700px;object-fit: cover;" width="500" height="700"/>
+        </div>
+      </ng-template>
+      <!--    }-->
     </ngb-carousel>
-    }
+    <!--    }-->
   </section>
   <section class="row justify-content-center" id="new-car">
     <h3 class="text-center">All model</h3>
     <div class="pt-5">
       <ng-container *ngIf="cars.length; else empty">
-        <swiper-container  fmSwiper  [config]="config" init="false">
+        <swiper-container fmSwiper [config]="config" init="false">
           <!--      <div>-->
           <swiper-slide *ngFor="let car of cars">
             <div class="card">
-              <img [src]="car.model_image"  class="card-img-top carousel-image cursor-pointer" [alt]="car.model" (click)="openImageDialog(car.model_image)">
+              <div class="card-img-top-wrapper">
+                <img [ngSrc]="car.model_image" width="500" height="500"
+                     class="card-img-top carousel-image cursor-pointer img-fluid" [alt]="car.model">
+                <div class="card-overlay border d-flex justify-content-center cursor-pointer"
+                     (click)="openImageDialog(car.model_image)"><span
+                  class="text-light align-self-center">View Image</span></div>
+              </div>
               <div class="card-body">
                 <h5 class="card-title">Model {{car.model}}</h5>
                 <p class="card-text">{{car.price | currency : 'MYR'}}</p>
                 <div class="d-flex justify-content-around flex-wrap">
-                  <a class="empty-btn mt-3" [routerLink]="'/car-details/'+car.id">Learn More
+                  <a mat-stroked-button color="primary" class="empty-btn mt-3" [routerLink]="'/car-details/'+car.id">Learn
+                    More
                     <i class="fa-solid fa-chevron-right"></i></a>
-                  <a class="empty-btn mt-3" (click)="initiateWhatsapp('I am interested in Model ' + car.model)">Whatsapp now
-                    <i class="fa-solid fa-chevron-right"></i></a>
+                  <button mat-stroked-button color="primary" class="empty-btn mt-3"
+                          (click)="initiateWhatsapp('I am interested in Model ' + car.model)">Whatsapp now
+                    <i class="fa-solid fa-chevron-right"></i></button>
                 </div>
               </div>
             </div>
@@ -55,29 +62,32 @@
   <section class="row justify-content-center bg-white-gray pt-5">
     <h3 class="text-center">Why Volvo?</h3>
     <div class="col-md-6 pt-5">
-      <div class="row justify-content-center">
-        <img class="img-fluid" src="assets/images/home/volvo-home-2.jpg"/>
+      <div class="row justify-content-center rounded-2">
+        <img class="img-fluid img-thumbnail rounded-2" ngSrc="assets/images/home/volvo-home-2.jpg" width="400" height="400" />
       </div>
       <div class="row">
         <div class="col-md-4 py-5">
           <h5>Making your life easier</h5>
-          <p class="why-volvo-paragraph">Our new take on getting from A to B. Get access to a <br /> Volvo when you want it, how you want it.</p>
+          <p class="why-volvo-paragraph">Our new take on getting from A to B. Get access to a <br/> Volvo when you want
+            it, how you want it.</p>
         </div>
         <div class="col-md-4 py-5">
           <h5>Our future is electric</h5>
           <p class="why-volvo-paragraph">
-            All our cars are available with electrified power. We help you reduce the environmental impact of daily life.</p>
+            All our cars are available with electrified power. We help you reduce the environmental impact of daily
+            life.</p>
         </div>
         <div class="col-md-4 py-5">
           <h5>Protecting what’s important</h5>
-          <p class="why-volvo-paragraph">We’re proud of our safety heritage. We’ll keep innovating new ways to help you protect what's important.</p>
+          <p class="why-volvo-paragraph">We’re proud of our safety heritage. We’ll keep innovating new ways to help you
+            protect what's important.</p>
         </div>
       </div>
     </div>
   </section>
   <section class="row justify-content-center test-drive-section py-5" id="test-drive-form">
     <div class="col-md-6">
-      <ng-container *ngIf="(carModels$ | async) as carModels;else loading;">
+      <ng-container *ngIf="(carModels$ | async) as carModels;">
         <app-appointment-form [color]="'primary'" [cars]="carModels "></app-appointment-form>
       </ng-container>
     </div>
@@ -85,26 +95,29 @@
       <div class="row">
         <div class="col-md-12">
           <h4>
-            Reserve your dream Volvo car now. <br /><br /> I am ready to help you realize your dream of owning a Volvo car.
+            Reserve your dream Volvo car now. <br/><br/> I am ready to help you realize your dream of owning a Volvo
+            car.
           </h4>
         </div>
         <div class="col-md-12 py-5">
           <app-google-map></app-google-map>
         </div>
         <div class="col-md-12 py-2">
-          <app-chat-now-btn [socialMedia]="'whatsapp'" [text]="'Leave us a message'" [message]="'I am interested'"></app-chat-now-btn>
+          <app-chat-now-btn [socialMedia]="'whatsapp'" [text]="'Leave us a message'"
+                            [message]="'I am interested'"></app-chat-now-btn>
         </div>
         <div class="col-md-12 py-2">
-          <app-chat-now-btn [socialMedia]="'messenger'" [text]="'Leave us a message'" [message]="'I am interested'"></app-chat-now-btn>
+          <app-chat-now-btn [socialMedia]="'messenger'" [text]="'Leave us a message'"
+                            [message]="'I am interested'"></app-chat-now-btn>
         </div>
       </div>
     </div>
 
   </section>
-
-  <app-chat-now-btn class="floating" socialMedia="whatsapp" text="Start to chat" message="I am interested"></app-chat-now-btn>
-<!--      <button mat-flat-button id="whatsapp-button" color="primary" (click)="initiateWhatsapp('I am interested')">-->
-<!--        <mat-icon><i class="fa-brands fa-whatsapp pe-3"></i></mat-icon>-->
-<!--        Start to chat-->
-<!--      </button>-->
+  <app-chat-now-btn class="floating" socialMedia="whatsapp" text="Start to chat"
+                    message="I am interested"></app-chat-now-btn>
+  <!--      <button mat-flat-button id="whatsapp-button" color="primary" (click)="initiateWhatsapp('I am interested')">-->
+  <!--        <mat-icon><i class="fa-brands fa-whatsapp pe-3"></i></mat-icon>-->
+  <!--        Start to chat-->
+  <!--      </button>-->
 </div>

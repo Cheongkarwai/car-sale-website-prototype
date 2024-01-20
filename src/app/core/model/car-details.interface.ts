@@ -4,10 +4,11 @@ export interface CarDetails{
   model:string;
   price:number;
   starting_price:number;
+  condition:string,
   milleage:number,
   image:string;
   model_image:string;
-  pdfUrl:string;
+  brochure_pdf:string;
   features:Feature[];
   interior_images:Image[];
   exterior_images:Image[];

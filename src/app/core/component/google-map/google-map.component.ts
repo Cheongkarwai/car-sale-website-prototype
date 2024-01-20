@@ -4,6 +4,7 @@ import {HttpClient, HttpClientJsonpModule, HttpClientModule} from "@angular/comm
 import {CommonModule} from "@angular/common";
 import {GoogleMapsModule} from "@angular/google-maps";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {environment} from "../../../../environments/environment.development";
 
 @Component({
   selector: 'app-google-map',
@@ -30,9 +31,10 @@ export class GoogleMapComponent {
   apiLoaded!:Observable<any>;
 
   constructor(private httpClient:HttpClient) {
+    this.loadGoogleMapApi();
   }
   loadGoogleMapApi(){
-    this.apiLoaded = this.httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyD4ABhdJ3YX5CfttoCUnt6KT9Q7rcjAUGU', 'callback')
+    this.apiLoaded = this.httpClient.jsonp(`https://maps.googleapis.com/maps/api/js?key=${environment.google_map_api_key}`, 'callback')
       .pipe(
         map(() => true),
         catchError((err) => of(err)),

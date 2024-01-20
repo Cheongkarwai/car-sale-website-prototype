@@ -20,6 +20,8 @@ import {MatChipSelectionChange, MatChipsModule} from "@angular/material/chips";
 import {MatButtonModule} from "@angular/material/button";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
 import {TableComponent} from "../../../../core/component/table/table.component";
+import {LoadingSpinnerComponent} from "../../../../core/component/loading-spinner/loading-spinner.component";
+import {LoadingProgressComponent} from "../../../../core/component/loading-progress/loading-progress.component";
 
 export interface Pageable {
   page: number;
@@ -43,6 +45,7 @@ export interface Pageable {
     MatButtonModule,
     MatPaginatorModule,
     TableComponent,
+    LoadingProgressComponent,
   ],
   templateUrl: './manage-appointment.component.html',
   styleUrl: './manage-appointment.component.css'

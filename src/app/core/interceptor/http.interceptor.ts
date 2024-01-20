@@ -24,6 +24,7 @@ import {
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {TokenService} from "../service/token.service";
 
 
 
@@ -56,6 +57,7 @@ export const HttpInterceptor:HttpInterceptorFn = (req,next)=>{
   const unprotectedRoute = [
     {url:`${domain}${host}/api/v1/cars`,method:'GET'},
     {url:`${domain}${host}/api/v1/appointments`,method: 'POST'},
+    {url:'https://volvo-sungaibesi.sgp1.digitaloceanspaces.com',method:'GET'}
   ]
 
   for(let route of loginRoute){
@@ -78,21 +80,20 @@ export const HttpInterceptor:HttpInterceptorFn = (req,next)=>{
   const authService = inject(AuthService);
   const router = inject(Router);
   const snackbar = inject(MatSnackBar);
+  const tokenService  = inject(TokenService);
 
-  return authService.findSecrets().pipe(concatMap(token=>{
-    const authReq = req.clone({
-      headers:req.headers.set('Authorization',`Bearer ${token.access_token}`),
-      withCredentials:true
-    });
-    return next(authReq);
-  }),catchError(err=>{
+  const authReq = req.clone({
+    headers:req.headers.set('Authorization',`Bearer ${tokenService.accessToken}`),
+    withCredentials:true
+  });
+  return next(authReq).pipe(catchError(err=>{
     if(err.status === 401){
-      return authService.refreshToken().pipe(switchMap((token)=>{
+      return authService.refreshToken(tokenService.refreshToken).pipe(switchMap((token)=>{
+        tokenService.saveToken(token);
         const authReq = req.clone({
           headers:req.headers.set('Authorization',`Bearer ${token.access_token}`),
           withCredentials:true
         });
-
         return next(authReq);
       })).pipe(catchError(err=>{
         if(err.status === 401){
@@ -105,6 +106,33 @@ export const HttpInterceptor:HttpInterceptorFn = (req,next)=>{
     }
     return throwError(err);
   }));
+
+  // return authService.findSecrets().pipe(concatMap(token=>{
+  //   const authReq = req.clone({
+  //     headers:req.headers.set('Authorization',`Bearer ${token.access_token}`),
+  //     withCredentials:true
+  //   });
+  //   return next(authReq);
+  // }),catchError(err=>{
+  //   if(err.status === 401){
+  //     return authService.refreshToken().pipe(switchMap((token)=>{
+  //       const authReq = req.clone({
+  //         headers:req.headers.set('Authorization',`Bearer ${token.access_token}`),
+  //         withCredentials:true
+  //       });
+  //
+  //       return next(authReq);
+  //     })).pipe(catchError(err=>{
+  //       if(err.status === 401){
+  //         authService.removeUserInfo();
+  //         router.navigateByUrl('/login')
+  //           .then(result=>snackbar.open('Login session has expired, please try to login.','Close',{duration:1000}));
+  //       }
+  //       return throwError(err);
+  //     }))
+  //   }
+  //   return throwError(err);
+  // }));
   // authService.findSecrets().pip({
   //   next:res=>{
   //     if(res){

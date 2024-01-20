@@ -4,3 +4,7 @@
   border-radius:10px;
   border-style:dashed
 }
+
+.error{
+  color:red;
+}

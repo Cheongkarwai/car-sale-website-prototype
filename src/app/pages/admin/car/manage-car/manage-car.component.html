@@ -1,3 +1,6 @@
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>
 <div class="container-fluid py-5 vh-80">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -28,19 +31,12 @@
           </div>
         </div>
         <ng-template #loading>
-          <div class="d-flex justify-content-center flex-column loading-container vh-80">
-            <span class="text-center">Loading.. Please contact admin if it is still loading 10 minutes</span>
-            <mat-spinner class="mt-5" style="margin:0 auto;"
-                         mode="indeterminate"></mat-spinner>
-          </div>
+          <app-loading-progress></app-loading-progress>
         </ng-template>
         <ng-container *ngIf="(cars$ | async) as accounts;else loading">
-          <div class="table-container mat-elevation-z8 " >
+          <div class="table-container" >
             <app-table [data]="accounts" [columns]="displayedColumns" (sort)="sorting($event)" (delete)="delete($event)" [enableEdit]="true" [enableDelete]="true"
             (edit)="edit($event)"></app-table>
-            <!--          </div>-->
-
-            <!--            <div class="d-flex">-->
             <mat-paginator [pageSizeOptions]="[25,50,100]"
                            [pageIndex]="pageable.page"
                            [pageSize]="pageable.size"

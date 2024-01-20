@@ -55,5 +55,51 @@ h4{
   font-size:25px;
 }
 
+.card-img-top-wrapper{
+  position:relative;
+  height:250px;
+}
+.card-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.card:hover .card-overlay {
+  opacity: 1;
+}
+
+/*.card-img-overlay{*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*  opacity: 0;*/
+/*  transition: .5s ease;*/
+/*  background: rgba(0, 0, 0, 0.5);*/
+/*  !*border:1px solid black;*!*/
+/*}*/
+/*.card-overlay:hover{*/
+/*  background-color:rgba(0,0,0,0.5);*/
+/*  opacity: 0.5;*/
+/*}*/
+
+/*.card-img-top{*/
+/*  position: relative;*/
+/*}*/
+
+/*.card-img-overlay:hover{*/
+/*  border:1px solid black;*/
+/*}*/
 
 

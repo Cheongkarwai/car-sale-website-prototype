@@ -51,8 +51,8 @@ html, body { height: 100%; }
 }
 
 .carousel-image {
-  height: 300px;
-  object-fit: cover;
+  height: 250px;
+  object-fit: fill;
 }
 
 .cursor-pointer{

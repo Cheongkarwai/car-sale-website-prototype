@@ -41,13 +41,15 @@ import {ChatNowBtnComponent} from "../../core/component/chat-now-btn/chat-now-bt
 import {ImageViewerComponent} from "../../core/component/image-viewer/image-viewer.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {environment} from "../../../environments/environment";
+import {LoadingSpinnerComponent} from "../../core/component/loading-spinner/loading-spinner.component";
+import {LoadingProgressComponent} from "../../core/component/loading-progress/loading-progress.component";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule, NavbarComponent, FooterComponent, NgbCarouselModule, SwiperDirective, MatInputModule, MatSelectModule, AppointmentFormComponent,
-    MatDialogModule, MatButtonModule, GoogleMapsModule, GoogleMapComponent, ChatNowBtnComponent, NgOptimizedImage, MatProgressSpinnerModule],
+    MatDialogModule, MatButtonModule, GoogleMapsModule, GoogleMapComponent, ChatNowBtnComponent, NgOptimizedImage, MatProgressSpinnerModule, LoadingSpinnerComponent, LoadingProgressComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -57,8 +59,9 @@ export class HomeComponent implements OnInit {
 
   showNavigationArrows = false;
   showNavigationIndicators = false;
-  images = ['assets/images/carousel/c40-gallery-1-1024x576.jpeg', 'assets/images/carousel/c40-gallery-2-1024x576.jpeg',
-    'assets/images/carousel/xc90-gallery-1-1024x576.jpeg', 'assets/images/carousel/xc90-gallery-7-1024x576.jpeg'];
+  images = ['assets/images/carousel/carousel-image-1.jpg', 'assets/images/carousel/carousel-image-2.jpg',
+    'assets/images/carousel/carousel-image-3.jpg', 'assets/images/carousel/carousel-image-4.jpg',
+  'assets/images/carousel/carousel-image-5.jpg','assets/images/carousel/carousel-image-6.jpg'];
 
   public config: SwiperOptions = {
     autoHeight: true,
@@ -87,7 +90,7 @@ export class HomeComponent implements OnInit {
         spaceBetween: 10,
         navigation: false,
         pagination: {clickable: true, dynamicBullets: true},
-        slidesPerView: 2,
+        slidesPerView: 1,
       };
     }
 

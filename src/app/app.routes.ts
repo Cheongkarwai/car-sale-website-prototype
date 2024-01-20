@@ -19,6 +19,7 @@ import {ManageCarComponent} from "./pages/admin/car/manage-car/manage-car.compon
 import {AdminGuard} from "./core/guard/admin.guard";
 import {NotFoundComponent} from "./pages/not-found/not-found.component";
 import {UnauthorizedComponent} from "./pages/unauthorized/unauthorized.component";
+import {EditCarComponent} from "./pages/admin/car/edit-car/edit-car.component";
 
 export const routes: Routes = [
   {path:'not-found',component:NotFoundComponent},
@@ -108,6 +109,11 @@ export const routes: Routes = [
             path: 'manage-car',
             component: ManageCarComponent,
             canActivate:[AdminGuard],
+          },
+          {
+            path:'edit-car/:id',
+            component: EditCarComponent,
+            canActivate: [AdminGuard]
           }
         ]
       },

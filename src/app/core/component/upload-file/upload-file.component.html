@@ -15,25 +15,47 @@
       </div>
     </div>
   </div>
-    <div *ngFor="let file of files;let i = index"
-         class="shadow p-3 my-3 bg-white rounded d-flex justify-content-between align-items-center">
+  <div  *ngIf="control.invalid">
+    <span class="error" *ngIf="control.getError('required')">File is required</span>
+  </div>
+  <ng-container *ngIf="control && control.getRawValue()"
+      >
+    <div *ngFor="let file of control.getRawValue();let i = index;" class="shadow p-3 my-3 bg-white rounded d-flex justify-content-between align-items-center">
       {{file.name}}
       <button mat-mini-fab color="primary" (click)="removeFile(i)">
         <mat-icon>clear</mat-icon>
       </button>
     </div>
+  </ng-container>
+<!--    <div *ngFor="let file of files;let i = index"-->
+<!--         class="shadow p-3 my-3 bg-white rounded d-flex justify-content-between align-items-center">-->
+<!--      {{file.name}}-->
+<!--      <button mat-mini-fab color="primary" (click)="removeFile(i)">-->
+<!--        <mat-icon>clear</mat-icon>-->
+<!--      </button>-->
+<!--    </div>-->
 </ng-container>
 <ng-template #singleUpload>
 
   <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
   *Supported extension ({{accept}})
   <input hidden (change)="selectFile($event)" #fileInput type="file" [accept]="accept">
+  <div class="error" *ngIf="control.hasError('required')">
+    File is required
+  </div>
   <!--      <div class="overflow-auto border rounded" style="height:300px;">-->
-    <div *ngFor="let file of files;let i = index"
-         class="shadow p-3 my-3 bg-white rounded d-flex justify-content-between align-items-center">
-      {{file.name}}
-      <button mat-mini-fab color="primary" (click)="removeFile(i)">
-        <mat-icon>clear</mat-icon>
-      </button>
-    </div>
+  <div *ngIf="control && control.getRawValue()"
+       class="shadow p-3 my-3 bg-white rounded d-flex justify-content-between align-items-center">
+    {{control.getRawValue().name}}
+    <button mat-mini-fab color="primary" (click)="removeSingleFile()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+<!--    <div *ngFor="let file of files;let i = index"-->
+<!--         class="shadow p-3 my-3 bg-white rounded d-flex justify-content-between align-items-center">-->
+<!--      {{file.name}}-->
+<!--      <button mat-mini-fab color="primary" (click)="removeFile(i)">-->
+<!--        <mat-icon>clear</mat-icon>-->
+<!--      </button>-->
+<!--    </div>-->
 </ng-template>

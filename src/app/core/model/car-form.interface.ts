@@ -12,7 +12,6 @@ export interface CarForm{
 }
 
 export interface Feature{
-  category:string;
   description:string;
   title:string;
   image:File;

@@ -2,24 +2,26 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {AbstractControl, FormControl, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.css'],
   standalone:true,
-  imports: [CommonModule, MatIconModule,MatButtonModule]
+  imports: [CommonModule, MatIconModule, MatButtonModule, ReactiveFormsModule]
 })
 export class UploadFileComponent implements OnInit {
 
-  files:File [] = [];
+  // files:File [] = [];
 
   @Input('format') accept!:string;
+  @Input() control!:FormControl;
 
   isUploading:boolean = false;
 
   @Input('multiple')  isMultipleUpload!:boolean;
-  @Output("uploadFile") uploadFile = new EventEmitter<File[]>();
+  // @Output("uploadFile") uploadFile = new EventEmitter<File[]>();
   constructor() { }
 
   ngOnInit(): void {
@@ -41,16 +43,18 @@ export class UploadFileComponent implements OnInit {
   }
 
   addFile(files:File[]){
+    const formFiles = this.control.getRawValue() as File[];
 
-    for(let file of files){
-      this.files.push(file);
+    for(let file of formFiles){
+      formFiles.push(file);
     }
+    this.control.setValue(formFiles);
   }
 
-  uploadFiles(){
-
-    this.uploadFile.emit(this.files);
-  }
+  // uploadFiles(){
+  //
+  //   this.uploadFile.emit(this.files);
+  // }
 
   wait(ms:number){
     return new Promise(resolve=>
@@ -75,20 +79,28 @@ export class UploadFileComponent implements OnInit {
   }
 
   removeFile(i:number) {
-    this.files.splice(i,1);
-    this.uploadFile.emit(this.files);
+    const files = this.control.getRawValue() as File[];
+    files.splice(i,1);
+    this.control.setValue(files);
+    // this.files.splice(i,1);
+    // this.uploadFile.emit(this.files);
+  }
+
+  removeSingleFile(){
+    this.control.reset();
   }
 
 
   selectFile(event:any) {
-    if(event.target.files.length > 0){
-      this.files = [];
-      this.files.push(event.target.files[0]);
-      this.uploadFile.emit(this.files);
-    }else{
-      this.files = [];
-      this.uploadFile.emit(this.files);
-    }
+    // if(event.target.files.length > 0){
+    //   this.files = [];
+    //   this.files.push(event.target.files[0]);
+    //   this.uploadFile.emit(this.files);
+    // }else{
+    //   this.files = [];
+    //   this.uploadFile.emit(this.files);
+    // }
+    this.control.setValue(event.target.files[0]);
   }
 
 
@@ -96,10 +108,11 @@ export class UploadFileComponent implements OnInit {
     if(event.target.files.length > 0){
       const files:FileList = event.target.files;
       await this.waitUploadingAnimation();
+      const formFiles = this.control.getRawValue();
       for(let i = 0;i < files.length; i++){
-        this.files.push(files.item(i) as File);
+        formFiles.push(files.item(i) as File);
       }
-      this.uploadFile.emit(this.files);
+      this.control.setValue(formFiles)
     }
   }
 }

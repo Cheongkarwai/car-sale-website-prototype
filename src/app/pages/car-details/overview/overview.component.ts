@@ -15,12 +15,14 @@ import {DeviceDetectorService} from "ngx-device-detector";
 import {ImageViewerComponent} from "../../../core/component/image-viewer/image-viewer.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {environment} from "../../../../environments/environment";
+import {LoadingSpinnerComponent} from "../../../core/component/loading-spinner/loading-spinner.component";
+import {LoadingProgressComponent} from "../../../core/component/loading-progress/loading-progress.component";
 
 @Component({
   selector: 'app-overview',
   standalone: true,
   imports: [CommonModule, SwiperDirective, MatButtonModule, MatIconModule, ChatNowBtnComponent, RouterModule, NgOptimizedImage
-  ,MatDialogModule],
+    , MatDialogModule, LoadingSpinnerComponent, LoadingProgressComponent],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -4,15 +4,18 @@ import {HttpClient, HttpClientJsonpModule, HttpClientModule} from "@angular/comm
 import {catchError, map, Observable, of} from "rxjs";
 import {CommonModule} from "@angular/common";
 import {GoogleMapComponent} from "../../core/component/google-map/google-map.component";
+import {BreadcrumbHeaderComponent, BreadcrumbRoute} from "../../core/component/header/header.component";
 
 @Component({
   selector: 'app-find-us',
   standalone: true,
-  imports: [CommonModule, GoogleMapsModule, HttpClientModule, HttpClientJsonpModule, GoogleMapComponent],
+  imports: [CommonModule, GoogleMapsModule, HttpClientModule, HttpClientJsonpModule, GoogleMapComponent, BreadcrumbHeaderComponent],
   templateUrl: './find-us.component.html',
   styleUrl: './find-us.component.css'
 })
 export class FindUsComponent {
+
+  routes:BreadcrumbRoute[] = [{link:'default',text:'Home'},{link:'',text:'Find Us'}];
 
   // center: google.maps.LatLngLiteral = {lat: 3.040426199735902, lng: 101.38380008594574};
   // zoom = 18;

@@ -22,14 +22,10 @@
         </div>
       </div>
       <ng-template #loading>
-        <div class="d-flex justify-content-center flex-column loading-container vh-80">
-          <span class="text-center">Loading.. Please contact admin if it is still loading 10 minutes</span>
-          <mat-spinner class="mt-5" style="margin:0 auto;"
-                       mode="indeterminate"></mat-spinner>
-        </div>
+        <app-loading-progress></app-loading-progress>
       </ng-template>
       <ng-container *ngIf="(appointments$ | async) as appointments;else loading">
-        <div class="table-container mat-elevation-z8">
+        <div class="table-container">
         <app-table [data]="appointments" [columns]="displayedColumns" (sort)="sorting($event)" [enableComplete]="enableComplete" [enableCancel]="enableCancel"
                    (cancel)="cancelAppointment($event)"
                    (complete)="completeAppointment($event)"></app-table>
@@ -42,77 +38,6 @@
                                      (page)="onPageSelection($event)">
                       </mat-paginator>
         </div>
-<!--        <div class="table-container mat-elevation-z8">-->
-<!--          <table mat-table [dataSource]="appointments.content" matSort (matSortChange)="sorting($event)">-->
-
-<!--            &lt;!&ndash;- Note that these columns can be defined in any order.-->
-<!--                  The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
-
-<!--            <ng-container matColumnDef="no">-->
-<!--              <th mat-header-cell *matHeaderCellDef> No</th>-->
-<!--              <td mat-cell-->
-<!--                  *matCellDef="let element;let i = index;">{{appointments.number * appointments.size + i + 1}}</td>-->
-<!--            </ng-container>-->
-
-<!--            <ng-container matColumnDef="emailAddress">-->
-<!--              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort by email address"> Email-->
-<!--                Address-->
-<!--              </th>-->
-<!--              <td mat-cell *matCellDef="let element"> {{element.emailAddress}} </td>-->
-<!--            </ng-container>-->
-
-<!--            <ng-container matColumnDef="fullName">-->
-<!--              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort by full name"> Full Name-->
-<!--              </th>-->
-<!--              <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>-->
-<!--            </ng-container>-->
-
-<!--            <ng-container matColumnDef="contactNumber">-->
-<!--              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort by contact no"> Contact-->
-<!--                No-->
-<!--              </th>-->
-<!--              <td mat-cell *matCellDef="let element"> {{element.contactNumber}} </td>-->
-<!--            </ng-container>-->
-
-<!--            <ng-container matColumnDef="timestamp">-->
-<!--              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort by date time">-->
-<!--                Appointment-->
-<!--                Date Time-->
-<!--              </th>-->
-<!--              <td mat-cell *matCellDef="let element"> {{element.timestamp | date : 'medium'}} </td>-->
-<!--            </ng-container>-->
-<!--            <ng-container matColumnDef="action">-->
-<!--              <th mat-header-cell *matHeaderCellDef> Action</th>-->
-<!--              <td mat-cell *matCellDef="let element">-->
-<!--                <button mat-icon-button color="primary" (click)="completeAppointment(element.id)">-->
-<!--                  <mat-icon>check</mat-icon>-->
-<!--                </button>-->
-<!--                <button mat-icon-button color="warn" (click)="cancelAppointment(element.id)">-->
-<!--                  <mat-icon>cancel</mat-icon>-->
-<!--                </button>-->
-<!--              </td>-->
-<!--            </ng-container>-->
-
-
-<!--            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
-<!--            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
-<!--            <ng-container *ngIf="appointments">-->
-<!--              <tr class="mat-row" *matNoDataRow>-->
-<!--                <td class="mat-cell" [attr.colspan]="displayedColumns.length">-->
-<!--                  No data found-->
-<!--                </td>-->
-<!--              </tr>-->
-<!--            </ng-container>-->
-<!--          </table>-->
-<!--          <mat-paginator [pageSizeOptions]="[25,50,100]"-->
-<!--                         [pageIndex]="pageable.page"-->
-<!--                         [pageSize]="pageable.size"-->
-<!--                         [length]="appointments.totalElements"-->
-<!--                         showFirstLastButtons-->
-<!--                         aria-label="Select page of periodic elements"-->
-<!--                         (page)="onPageSelection($event)">-->
-<!--          </mat-paginator>-->
-<!--        </div>-->
       </ng-container>
     </div>
 

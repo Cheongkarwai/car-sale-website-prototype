@@ -22,7 +22,9 @@ import {
 } from "../../../../core/component/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatButtonModule} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {LoadingSpinnerComponent} from "../../../../core/component/loading-spinner/loading-spinner.component";
+import {LoadingProgressComponent} from "../../../../core/component/loading-progress/loading-progress.component";
 
 @Component({
   selector: 'app-manage-car',
@@ -42,7 +44,9 @@ import {RouterLink} from "@angular/router";
     MatDialogModule,
     MatSnackBarModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
+    LoadingSpinnerComponent,
+    LoadingProgressComponent
   ],
   templateUrl: './manage-car.component.html',
   styleUrl: './manage-car.component.css'
@@ -68,12 +72,29 @@ export class ManageCarComponent implements OnInit{
   displayedColumns = [
     {key:'no',value:'No'},
     {key:'model',value:'Model'},
-    {key:'starting_price',value:'Price'},
+    {key:'starting_price',value:'Price (MYR)'},
     {key:'action',value:'Action'}
   ];
 
+  options =
+    [
+      {
+        selected: true,
+        title: 'NEW',
+        value: 'NEW',
+        color: 'accent'
+      },
+      {
+        selected: false,
+        title: 'Used',
+        value: 'USED',
+        color: 'primary'
+      }]
+
+
   constructor(private fb:FormBuilder,private carService:CarService,
-              private dialog:MatDialog,private snackBar:MatSnackBar) {
+              private dialog:MatDialog,private snackBar:MatSnackBar,
+              private router:Router) {
   }
 
   ngOnInit() {
@@ -166,6 +187,6 @@ export class ManageCarComponent implements OnInit{
   }
 
   edit(carDetails: CarDetails) {
-    console.log(carDetails);
+    this.router.navigate(['/admin','car','edit-car',carDetails.id]);
   }
 }

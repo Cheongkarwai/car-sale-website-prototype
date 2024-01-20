@@ -6,4 +6,5 @@ mat-icon {
   position: fixed;
   right: 20px;
   bottom: 30px;
+  z-index:9999;
 }

@@ -11,6 +11,7 @@ import {BreadcrumbHeaderComponent, BreadcrumbRoute} from "../../core/component/h
 import {ImageViewerComponent} from "../../core/component/image-viewer/image-viewer.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {environment} from "../../../environments/environment";
+import {LoadingProgressComponent} from "../../core/component/loading-progress/loading-progress.component";
 
 @Component({
   selector: 'app-used-car-listing',
@@ -21,7 +22,8 @@ import {environment} from "../../../environments/environment";
     MatCardModule,
     BreadcrumbHeaderComponent,
     NgOptimizedImage,
-    MatDialogModule
+    MatDialogModule,
+    LoadingProgressComponent
   ],
   templateUrl: './used-car-listing.component.html',
   styleUrl: './used-car-listing.component.css'

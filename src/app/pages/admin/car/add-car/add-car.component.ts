@@ -1,7 +1,7 @@
 import {Component, DestroyRef, inject, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {MatInputModule} from "@angular/material/input";
-import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {UploadFileComponent} from "../../../../core/component/upload-file/upload-file.component";
@@ -15,19 +15,22 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatSelectChange, MatSelectModule} from "@angular/material/select";
 import {Subject} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-add-car',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule,
     MatDialogModule, MatSnackBarModule,
-    UploadFileComponent, MatSelectModule],
+    UploadFileComponent, MatSelectModule, RouterLink],
   templateUrl: './add-car.component.html',
   styleUrl: './add-car.component.css'
 })
 export class AddCarComponent implements OnInit{
 
   addNewCarForm!:FormGroup;
+
+  isSubmitButtonLoading = false;
   constructor(private fb:FormBuilder,private carService:CarService,
               private dialog:MatDialog,private snackBar:MatSnackBar){}
 
@@ -36,7 +39,7 @@ export class AddCarComponent implements OnInit{
       brand:['Volvo',Validators.required],
       price:[0,Validators.required],
       model:['',Validators.required],
-      condition:['',Validators.required],
+      condition:['NEW',Validators.required],
       milleage:[{disabled:true,value:0},Validators.required],
       features:this.fb.array([this.createFeatureFormArray()]),
       car_model_image:[null,Validators.required],
@@ -49,7 +52,6 @@ export class AddCarComponent implements OnInit{
 
   createFeatureFormArray(){
     return this.fb.group({
-      category:['',Validators.required],
       description:['',Validators.required],
       title:['',Validators.required],
       image:[null,Validators.required],
@@ -70,86 +72,31 @@ export class AddCarComponent implements OnInit{
   }
 
   submitForm(event:SubmitEvent){
-    console.log("New Car form is invalid "+this.addNewCarForm.invalid);
-    console.log("Feature Form Array is invalid "+this.featureFormArray.invalid);
-
+    this.isSubmitButtonLoading = true;
     if(this.addNewCarForm.invalid && this.featureFormArray.invalid){
+      this.isSubmitButtonLoading = false;
       this.snackBar.open('Please fill in the required fields','Close',{duration:1000});
 
     }else{
-      switch(this.addNewCarForm.controls['condition'].getRawValue()){
-        case 'USED':
-          console.log(this.addNewCarForm.getRawValue());
-          const dialog = this.openConfirmationDialog("Create used car", `Are you sure you want to create?`);
-          dialog.afterClosed().subscribe(dialogResult => {
-            if (dialogResult) {
-              this.carService.saveUsedCar(this.addNewCarForm.getRawValue())
-                .subscribe({
-                  next:res=>{
-                    this.snackBar.open('Success','Close',{duration:1000});
-                    window.location.reload();
-                  },
-                  error:err=>this.snackBar.open('Failed', 'Close',{duration:1000})
-                })
-            }
-          });
-          break;
-        case  'NEW':
-
-          const dialogRef = this.openConfirmationDialog("Create new car", `Are you sure you want to create?`);
-          dialogRef.afterClosed().subscribe(dialogResult => {
-            if (dialogResult) {
-              this.carService.saveNewCar(this.addNewCarForm.getRawValue())
-                .subscribe({
-                  next:res=>{
-                    this.snackBar.open('Success','Close',{duration:1000});
-                    window.location.reload();
-                  },
-                  error:err=>this.snackBar.open('Failed', 'Close',{duration:1000})
-                })
-            }
-          });
-          break;
-      }
+      this.isSubmitButtonLoading = true;
+      const dialog = this.openConfirmationDialog("Create used car", `Are you sure you want to create?`);
+      dialog.afterClosed().subscribe(dialogResult => {
+        if (dialogResult) {
+          this.carService.save(this.addNewCarForm.getRawValue())
+            .subscribe({
+              next:res=>{
+                this.isSubmitButtonLoading = false;
+                this.snackBar.open('Success','Close',{duration:1000});
+                window.location.reload();
+              },
+              error:err=>{
+                this.isSubmitButtonLoading = false;
+                this.snackBar.open('Failed', 'Close',{duration:1000})
+              }
+            })
+        }
+      });
     }
-
-    let isImageFormControlInvalid = false;
-
-    // switch(this.addNewCarForm.controls['condition'].getRawValue()){
-    //   case 'USED':
-    //     if(!this.addNewCarForm.controls['car_model_image'].getRawValue()){
-    //       isImageFormControlInvalid = true;
-    //     }
-    //
-    //     break;
-    //
-    //   case 'NEW':
-    //
-    //     if(!this.addNewCarForm.controls['car_model_image'].getRawValue() || !this.addNewCarForm.controls['exterior_images'].getRawValue() ||
-    //       !this.addNewCarForm.controls['interior_images'].getRawValue() || !this.addNewCarForm.controls['brochure_pdf'].getRawValue()
-    //     || this.featureFormArray.invalid){
-    //       isImageFormControlInvalid = true;
-    //     }
-    //
-    //     break;
-    //
-    // }
-
-    // if(!this.addNewCarForm.invalid){
-    //   const dialogRef = this.openConfirmationDialog("Create new car", `Are you sure you want to create?`);
-    //   dialogRef.afterClosed().subscribe(dialogResult => {
-    //     if (dialogResult) {
-    //       this.carService.saveNewCar(this.addNewCarForm.getRawValue())
-    //         .subscribe({
-    //           next:res=>this.snackBar.open('Success','Close',{duration:1000}),
-    //           error:err=>this.snackBar.open('Failed', 'Close',{duration:1000})
-    //         })
-    //     }
-    //   });
-    // }else{
-    //   this.snackBar.open('Please fill in the required fields','Close',{duration:1000});
-    // }
-
   }
 
   openConfirmationDialog(title:string,message:string){
@@ -207,5 +154,25 @@ export class AddCarComponent implements OnInit{
           this.addNewCarForm.controls['milleage'].disable();
           break;
       }
+  }
+  get modelImage() {
+    return this.addNewCarForm.get('car_model_image') as FormControl;
+  }
+
+  get brochurePdf() {
+    return this.addNewCarForm.get('brochure_pdf') as FormControl;
+  }
+
+
+  featureImage(i: number) {
+    return this.featureFormArray.at(i).get('image') as FormControl;
+  }
+
+  get exteriorImages(){
+    return this.addNewCarForm.controls['exterior_images'] as FormControl;
+  }
+
+  get interiorImages(){
+    return this.addNewCarForm.controls['interior_images'] as FormControl;
   }
 }

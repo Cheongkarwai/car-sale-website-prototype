@@ -34,3 +34,12 @@ h2{
   font-size:25px;
   font-family:'Montserrat Extra Bold',serif;
 }
+
+#interior-overlay,#exterior-overlay{
+  opacity:0;
+}
+
+#interior-overlay:hover,#exterior-overlay:hover{
+  background-color:rgba(0,0,0,0.3);
+  opacity:1;
+}

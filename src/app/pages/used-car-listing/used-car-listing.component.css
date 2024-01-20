@@ -8,3 +8,7 @@ mat-card-img{
   width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
   height: 70%;
 }
+
+.content{
+  min-height:30em;
+}

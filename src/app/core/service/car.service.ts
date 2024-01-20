@@ -85,7 +85,6 @@ export class CarService {
             id: car.id,
             brand: car.brand,
             model: car.model,
-            pdfUrl: car.pdfUrl,
           } as CarBrochure;
         })
       }))
@@ -159,41 +158,86 @@ export class CarService {
     return this.httpClient.post(`${this.url}/used`, formData);
   }
 
-  saveNewCar(carForm: CarForm) {
+  save(carForm: CarForm) {
     const formData = new FormData();
     const {
-      brand, price, model, features, condition,
+      brand, price, model, features, condition, milleage,
     } = carForm;
     const carBody = {
       brand: brand,
       model: model,
       starting_price: price,
       condition: condition,
+      milleage: milleage,
       features: features.map(feature => {
         return {
-          category: feature.category,
           title: feature.title,
           description: feature.description
         };
       })
     };
-    console.log(carBody);
+
+    formData.append("car", new Blob([JSON.stringify(carBody)], {type: 'application/json'}));
+    formData.append("car_model_image", carForm.car_model_image);
+
+   if(condition === 'NEW'){
+        // @ts-ignore
+        formData.append("brochure_pdf", carForm.brochure_pdf);
+
+        for (let image of carForm.exterior_images) {
+          formData.append("exterior_images", image);
+        }
+        for (let image of carForm.interior_images) {
+          formData.append("interior_images", image);
+        }
+        const featureImage = features.map(feature => feature.image);
+
+        for (let image of featureImage) {
+          formData.append("feature_images", image);
+        }
+
+    }
+    return this.httpClient.post(`${this.url}`, formData);
+  }
+
+  edit(id:number,carForm: CarForm) {
+    const formData = new FormData();
+    const {
+      brand, price, model, features, condition, milleage,
+    } = carForm;
+    const carBody = {
+      brand: brand,
+      model: model,
+      starting_price: price,
+      condition: condition,
+      milleage: milleage,
+      features: features.map(feature => {
+        return {
+          title: feature.title,
+          description: feature.description
+        };
+      })
+    };
     // @ts-ignore
     formData.append("car", new Blob([JSON.stringify(carBody)], {type: 'application/json'}));
     formData.append("car_model_image", carForm.car_model_image);
-    formData.append("brochure_pdf", carForm.brochure_pdf);
 
-    for (let image of carForm.exterior_images) {
-      formData.append("exterior_images", image);
-    }
-    for (let image of carForm.interior_images) {
-      formData.append("interior_images", image);
-    }
-    const featureImage = features.map(feature => feature.image);
+   if(condition === 'NEW'){
+     formData.append("car_model_image", carForm.car_model_image);
+     formData.append("brochure_pdf", carForm.brochure_pdf);
 
-    for (let image of featureImage) {
-      formData.append("feature_images", image);
-    }
-    return this.httpClient.post(`${this.url}/new`, formData);
+     for (let image of carForm.exterior_images) {
+       formData.append("exterior_images", image);
+     }
+     for (let image of carForm.interior_images) {
+       formData.append("interior_images", image);
+     }
+     const featureImage = features.map(feature => feature.image);
+
+     for (let image of featureImage) {
+       formData.append("feature_images", image);
+     }
+   }
+    return this.httpClient.put(`${this.url}/${id}`, formData);
   }
 }

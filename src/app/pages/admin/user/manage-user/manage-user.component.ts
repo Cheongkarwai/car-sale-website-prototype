@@ -25,6 +25,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {EditDialogComponent} from "../../../../core/component/edit-dialog/edit-dialog.component";
 import {TableComponent} from "../../../../core/component/table/table.component";
+import {LoadingSpinnerComponent} from "../../../../core/component/loading-spinner/loading-spinner.component";
+import {LoadingProgressComponent} from "../../../../core/component/loading-progress/loading-progress.component";
 
 @Component({
   selector: 'app-manage-user',
@@ -42,7 +44,9 @@ import {TableComponent} from "../../../../core/component/table/table.component";
     MatProgressSpinnerModule,
     MatPaginatorModule,
     MatButtonModule,
-    TableComponent
+    TableComponent,
+    LoadingSpinnerComponent,
+    LoadingProgressComponent
   ],
   templateUrl: './manage-user.component.html',
   styleUrl: './manage-user.component.css'

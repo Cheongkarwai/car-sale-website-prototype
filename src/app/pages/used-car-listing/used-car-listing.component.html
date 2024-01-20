@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<app-breadcrumb-header [routes]="routes"></app-breadcrumb-header>
+<app-breadcrumb-header [routes]="routes" title="Volvo SELEKT"></app-breadcrumb-header>
   <section class="row justify-content-center py-5">
     <div class="col-md-8 text-center pb-5 border-bottom">
       <h2 class="title pb-5">Volvo Quality Used Cars</h2>
@@ -9,13 +9,16 @@
       <button mat-stroked-button color="primary" (click)="initiateWhatsapp('I am interested in used car')">Whatsapp us</button>
     </div>
   </section>
-  <section class="row justify-content-center pb-5">
+  <section class="row justify-content-center pb-5 content">
     <div class="col-md-8 text-center">
-      <ng-template #loading></ng-template>
+      <ng-template #loading>
+        <app-loading-progress></app-loading-progress>
+      </ng-template>
       <div class="row" *ngIf="(usedCars$ | async) as usedCars;else loading;">
-        <div class="col-md-4 py-3" *ngFor="let usedCar of usedCars.content">
+        <div *ngIf="usedCars.content.length === 0" class="col-md-4 col-lg-4 col-sm-12 text-center">Not Available</div>
+        <div class="col-md-4 col-lg-4 col-sm-12 py-3" *ngFor="let usedCar of usedCars.content">
           <mat-card>
-            <img mat-card-image class="cursor-pointer carousel-image" [src]="usedCar.model_image"  [alt]="usedCar.model" (click)="openImageDialog(usedCar.model_image)"/>
+            <img mat-card-image class="cursor-pointer  img-fluid" [ngSrc]="usedCar.model_image" width="500" height="350"  [alt]="usedCar.model" (click)="openImageDialog(usedCar.model_image)"/>
             <mat-card-content class="pb-3 pt-2 text-start">
               <h3>{{usedCar.model}}</h3>
               <p >Starting from {{usedCar.starting_price | currency : 'MYR'}}</p>

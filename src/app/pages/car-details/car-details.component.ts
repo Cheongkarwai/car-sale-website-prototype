@@ -9,6 +9,7 @@ import {HttpClientModule, HttpParams} from "@angular/common/http";
 import {Color} from "../../core/model/color.interface";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {LoadingSpinnerComponent} from "../../core/component/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-car-details',
@@ -18,7 +19,8 @@ import {MatIconModule} from "@angular/material/icon";
     NgbNavModule,
     RouterModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    LoadingSpinnerComponent
   ],
   templateUrl: './car-details.component.html',
   styleUrl: './car-details.component.css'

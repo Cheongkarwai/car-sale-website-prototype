@@ -23,18 +23,11 @@
           </div>
         </div>
         <ng-template #loading>
-          <div class="d-flex justify-content-center flex-column loading-container vh-80">
-            <span class="text-center">Loading.. Please contact admin if it is still loading 10 minutes</span>
-            <mat-spinner class="mt-5" style="margin:0 auto;"
-                         mode="indeterminate"></mat-spinner>
-          </div>
+          <app-loading-progress></app-loading-progress>
         </ng-template>
         <ng-container *ngIf="(accounts$ | async) as accounts;else loading">
-          <div class="table-container mat-elevation-z8 " >
+          <div class="table-container" >
               <app-table [data]="accounts" [columns]="displayedColumns" [enableEdit]="true" [enableDelete]="true" (sort)="sorting($event)" (delete)="deleteAccount($event)" (edit)="editAccount($event)"></app-table>
-<!--          </div>-->
-
-<!--            <div class="d-flex">-->
               <mat-paginator [pageSizeOptions]="[25,50,100]"
                              [pageIndex]="pageable.page"
                              [pageSize]="pageable.size"

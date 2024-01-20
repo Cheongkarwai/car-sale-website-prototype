@@ -12,6 +12,8 @@ import {
   BreadcrumbRoute,
   BreadcrumbHeaderComponent
 } from "../../core/component/header/header.component";
+import {LoadingSpinnerComponent} from "../../core/component/loading-spinner/loading-spinner.component";
+import {LoadingProgressComponent} from "../../core/component/loading-progress/loading-progress.component";
 
 @Component({
   selector: 'app-download-brochure',
@@ -22,7 +24,9 @@ import {
     MatIconModule,
     RouterLink,
     BreadcrumbHeaderComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    LoadingSpinnerComponent,
+    LoadingProgressComponent
   ],
   templateUrl: './download-brochure.component.html',
   styleUrl: './download-brochure.component.css'

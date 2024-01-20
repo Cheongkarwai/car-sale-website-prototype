@@ -22,12 +22,12 @@ export class AuthService {
   }
 
 
-  findSecrets() {
-    return this.httpClient.post<Token>(`${this.url}/secrets`, null);
-  }
+  // findSecrets() {
+  //   return this.httpClient.post<Token>(`${this.url}/secrets`, null);
+  // }
 
-  refreshToken() {
-    return this.httpClient.post<Token>(`${this.url}/refresh-token`, null);
+  refreshToken(refresh_token:string) {
+    return this.httpClient.post<Token>(`${this.url}/refresh-token`, refresh_token);
   }
 
   logout() {
@@ -36,8 +36,8 @@ export class AuthService {
   }
 
   setUserInfo(account: Account) {
-    localStorage.setItem('authorities', JSON.stringify(account?.authorities))
-    localStorage.setItem('username', account?.username);
+    sessionStorage.setItem('authorities', JSON.stringify(account?.authorities))
+    sessionStorage.setItem('username', account?.username);
   }
 
   getUserInfo() {
@@ -45,12 +45,14 @@ export class AuthService {
   }
 
   removeUserInfo() {
-    localStorage.removeItem('authorities');
-    localStorage.removeItem('username');
+    sessionStorage.removeItem('authorities');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('access_token');
+    sessionStorage.removeItem('refresh_token');
   }
 
   isAdmin() {
-    const authoritiesString = localStorage.getItem('authorities');
+    const authoritiesString = sessionStorage.getItem('authorities');
     if (authoritiesString) {
       const authorities: GrantedAuthority [] = JSON.parse(authoritiesString);
       if (authorities.map(authority => authority.authority).includes('ADMIN')) {

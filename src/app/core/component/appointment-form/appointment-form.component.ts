@@ -60,7 +60,13 @@ export class AppointmentFormComponent implements OnInit {
                 const snackBar = this.snackBar.open("Booking successfully.", "Close", {
                   duration: 1000
                 });
-                snackBar.afterDismissed().subscribe(res => this.testDriveForm.reset());
+                snackBar.afterDismissed().subscribe(res => {
+                  this.testDriveForm.reset();
+                  this.testDriveForm.controls['email_address'].setErrors(null);
+                  this.testDriveForm.controls['full_name'].setErrors(null);
+                  this.testDriveForm.controls['contact_number'].setErrors(null);
+                  this.testDriveForm.controls['model_name'].setErrors(null);
+                });
               },
               error: err => this.snackBar.open("Failed", "Close", {duration: 1000})
             });

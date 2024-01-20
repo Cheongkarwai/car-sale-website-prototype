@@ -12,6 +12,7 @@ import {RouterModule} from "@angular/router";
 export class BreadcrumbHeaderComponent {
 
   @Input() routes!:BreadcrumbRoute[];
+  @Input() title!:string;
 }
 
 

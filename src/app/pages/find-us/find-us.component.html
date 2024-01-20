@@ -1,11 +1,7 @@
-<div class="container-fluid py-5 find-us-container">
-  <div class="d-flex justify-content-center">
-    <h1>
-      Contact Us
-    </h1>
-  </div>
-  <section class="row g-5 find-us-section">
-    <div class="col-6">
+<div class="container-fluid find-us-container">
+  <app-breadcrumb-header [routes]="routes" title="Find us"></app-breadcrumb-header>
+  <section class="row g-3 find-us-section">
+    <div class="col-md-6 col-lg-6 col-sm-12">
       <div class="purple-gradient color-block z-depth-1 p-3 shadow bg-white rounded d-flex flex-column">
         <span class="text-dark weight-bold h5"><i class="fa-regular fa-map"></i> Location</span>
 <!--        <ng-container *ngIf="(apiLoaded | async)">-->
@@ -20,17 +16,17 @@
         <app-google-map></app-google-map>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-md-6 col-lg-6 col-sm-12">
       <div class="purple-gradient color-block z-depth-1 p-3 shadow bg-white rounded d-flex flex-column">
         <span class="text-dark weight-bold h5">
            <i class="fa-solid fa-location-dot pe-2"></i>Address</span>
         <address>
-          <br />
-            0333754300<br />
+
             <br />
-         No KU18, Taman Perindustrian, 39,<br />
-          Lebuh Sultan Mohamed 2, Bandar Sultan Suleiman,<br />
-          42000 Port Klang, Selangor
+          No.855 Lebuhraya Sungai Besi <br /> 57100 Kuala Lumpur, Malaysia
+          <br />
+          <br />
+          +6012-296 9789<br />
         </address>
       </div>
     </div>
